@@ -1,29 +1,207 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Main">
+      <UniqueIdentifier>{f73da885-dc61-4942-a1e7-e73aa7b97708}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="HLSL">
+      <UniqueIdentifier>{b260d4f8-1506-4529-8e79-469af1d7aa2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX">
+      <UniqueIdentifier>{8f724920-9491-4b75-bcde-4fc72542dd77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{c81ac295-84a5-4ad0-894b-d7870c365aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{fe6cba03-77a7-4f8e-b696-cad12900e168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input\InputSystem">
+      <UniqueIdentifier>{8e05b63b-4034-4684-b06e-e44c36c5f504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Time">
+      <UniqueIdentifier>{94f34c5c-7ce5-4bd1-91d6-76bc755e328d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Model">
+      <UniqueIdentifier>{f7c7f161-46ea-4de4-aad0-1bc8bb43d791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX\VertexBuffer">
+      <UniqueIdentifier>{d140243b-21ec-4d95-afd8-855b263a994f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{c13bfe11-b417-428e-8d5d-8d31ef735308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Transform">
+      <UniqueIdentifier>{a2ee88b5-5cf1-4501-99c9-474d41ece0c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{002359cf-c0d1-479f-9050-4092ff4e9649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX\Graphics">
+      <UniqueIdentifier>{7baf1dcf-524e-47fb-b03f-d3f569792052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX\Shader">
+      <UniqueIdentifier>{ff055fe3-95b3-42c2-b0b9-4eb60198f288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX\RenderContext">
+      <UniqueIdentifier>{ce04d7d6-68da-45b9-80f9-3dd1b839830e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX\RenderTarget">
+      <UniqueIdentifier>{c973e717-f617-41af-9c43-4d72b0beccc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX\Viewport">
+      <UniqueIdentifier>{f9c764f3-4452-4cd3-96ad-05bdf94e0605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Renderer">
+      <UniqueIdentifier>{7715d37f-6fed-4a33-bf24-fcb0086cea48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\AssetManager">
+      <UniqueIdentifier>{fed9a04e-864a-4c1b-8d31-24bed7ddced0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Asset">
+      <UniqueIdentifier>{333a5eb1-8e8e-4125-82e2-8d901d50f2df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Debug">
+      <UniqueIdentifier>{960cb4a6-fd8e-4b69-bb5d-be4167d779a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="main.h">
+      <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="pch.h">
+      <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="GameGraphics.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Model.h">
+      <Filter>Engine\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>DX\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="DX.h">
+      <Filter>DX</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Engine\Input\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTarget.h">
+      <Filter>DX\RenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>DX\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>DX\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContext.h">
+      <Filter>DX\RenderContext</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
+      <Filter>DX\Viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Engine\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Engine\AssetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="IAsset.h">
+      <Filter>Engine\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="asd.h" />
+    <ClInclude Include="Debug.h">
+      <Filter>Engine\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameGraphics.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>DX\VertexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="DX.cpp">
+      <Filter>DX</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Engine\Input\InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTarget.cpp">
+      <Filter>DX\RenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>DX\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>DX\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContext.cpp">
+      <Filter>DX\RenderContext</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewport.cpp">
+      <Filter>DX\Viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Engine\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Engine\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="IAsset.cpp">
+      <Filter>Engine\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="asd.cpp" />
+    <ClCompile Include="Debug.cpp">
+      <Filter>Engine\Debug</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Common.hlsl">
+      <Filter>HLSL</Filter>
+    </None>
+    <None Include="Transform.hlsl">
+      <Filter>HLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

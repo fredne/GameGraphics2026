@@ -1,9 +1,10 @@
 #pragma once
 #include "Common.h"
+#include "Resource.h"
 
 namespace F
 {
-	class Shader
+	class Shader : Resource
 	{
 	private:
 		ID3D11InputLayout* inputLayout = nullptr;
@@ -11,10 +12,15 @@ namespace F
 		ID3D11PixelShader* pixelShader = nullptr;
 
 	public:
-		Shader(std::wstring vsFile, std::wstring psFile);
+		Shader(const std::wstring& vsFile, const std::wstring& psFile);
 		~Shader();
 
+		std::vector<char> LoadCSO(const std::wstring& filename);
+		void LoadHLSL(const std::wstring& vsFile, const std::wstring& psFile);
+
 		void Bind(ID3D11DeviceContext* context);
+
+
 
 	};
 

@@ -17,10 +17,9 @@ namespace F
 	class Shader;
 	class DX
 	{
-		IDXGISwapChain* swapChain;
+		static IDXGISwapChain* swapChain;
 		RenderContext* renderContext;
 		RenderTarget* defalutRT;
-		Shader* defalutShader;
 
 		void InitD3D(Window* window);
 
@@ -32,10 +31,9 @@ namespace F
 		~DX();
 
 		void Render();
-		void SwapChain();
+		static void SwapChain();
 
 		RenderContext* GetRenderContext();
-		Shader* GetShader();
 
 
 	};

@@ -79,6 +79,7 @@
       <LanguageStandard>stdcpp23</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine;$(ProjectDir)Engine/Archive;$(ProjectDir)Engine/System;$(ProjectDir)Engine/System/AssetSystem/Asset;$(ProjectDir)Engine/Graphics;$(ProjectDir)Engine/Component;$(ProjectDir)Engine/Resource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -96,6 +97,7 @@
       <LanguageStandard>stdcpp23</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine;$(ProjectDir)Engine/Archive;$(ProjectDir)Engine/System;$(ProjectDir)Engine/System/AssetSystem/Asset;$(ProjectDir)Engine/Graphics;$(ProjectDir)Engine/Component;$(ProjectDir)Engine/Resource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -111,6 +113,7 @@
       <LanguageStandard>stdcpp23</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine;$(ProjectDir)Engine/Archive;$(ProjectDir)Engine/System;$(ProjectDir)Engine/System/AssetSystem/Asset;$(ProjectDir)Engine/Graphics;$(ProjectDir)Engine/Component;$(ProjectDir)Engine/Resource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -128,6 +131,7 @@
       <LanguageStandard>stdcpp23</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine;$(ProjectDir)Engine/Archive;$(ProjectDir)Engine/System;$(ProjectDir)Engine/System/AssetSystem/Asset;$(ProjectDir)Engine/Graphics;$(ProjectDir)Engine/Component;$(ProjectDir)Engine/Resource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,72 +139,82 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="asd.h" />
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="IAsset.h" />
-    <ClInclude Include="AssetManager.h" />
-    <ClInclude Include="DX.h" />
-    <ClInclude Include="Engine.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Engine\System\AssetSystem\AssetLoader.h" />
+    <ClInclude Include="Engine\Common.h" />
+    <ClInclude Include="Engine\System\Debug\Debug.h" />
+    <ClInclude Include="Engine\System\AssetSystem\Asset\Asset.h" />
+    <ClInclude Include="Engine\System\AssetSystem\AssetManager.h" />
+    <ClInclude Include="Engine\Graphics\DX.h" />
+    <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\pch.h" />
+    <ClInclude Include="Engine\Graphics\Graphics.h" />
+    <ClInclude Include="Engine\System\File\File.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="Engine\System\Input\InputSystem.h" />
+    <ClInclude Include="Engine\Resource\Material\Material.h" />
     <ClInclude Include="Model.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="RenderContext.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="RenderTarget.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="Time.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="VertexBuffer.h">
+    <ClInclude Include="Engine\Graphics\RenderContext.h" />
+    <ClInclude Include="Engine\Component\Renderer\Renderer.h" />
+    <ClInclude Include="Engine\Graphics\RenderTarget.h" />
+    <ClInclude Include="Engine\Resource\Shader\Shader.h" />
+    <ClInclude Include="Engine\System\Time\Time.h" />
+    <ClInclude Include="Engine\Component\Transform\Transform.h" />
+    <ClInclude Include="Engine\Graphics\VertexBuffer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Viewport.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="Engine\Graphics\Viewport.h" />
+    <ClInclude Include="Engine\Window\Window.h" />
+    <ClInclude Include="Engine\Resource\Resource.h" />
+    <ClInclude Include="Engine\System\AssetSystem\Asset\ShaderAsset.h" />
+    <ClInclude Include="Engine\Archive\ResourceArchive.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="asd.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="IAsset.cpp" />
-    <ClCompile Include="AssetManager.cpp" />
-    <ClCompile Include="DX.cpp" />
-    <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Engine\System\AssetSystem\AssetLoader.cpp" />
+    <ClCompile Include="Engine\System\Debug\Debug.cpp" />
+    <ClCompile Include="Engine\System\AssetSystem\Asset\Asset.cpp" />
+    <ClCompile Include="Engine\System\AssetSystem\AssetManager.cpp" />
+    <ClCompile Include="Engine\Graphics\DX.cpp" />
+    <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\Graphics\Graphics.cpp" />
+    <ClCompile Include="Engine\System\File\File.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="Engine\System\Input\InputSystem.cpp" />
+    <ClCompile Include="Engine\Resource\Material\Material.cpp" />
     <ClCompile Include="Model.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="Engine\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="RenderContext.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="RenderTarget.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="VertexBuffer.cpp" />
-    <ClCompile Include="Viewport.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Engine\Graphics\RenderContext.cpp" />
+    <ClCompile Include="Engine\Component\Renderer\Renderer.cpp" />
+    <ClCompile Include="Engine\Graphics\RenderTarget.cpp" />
+    <ClCompile Include="Engine\Resource\Shader\Shader.cpp" />
+    <ClCompile Include="Engine\System\Time\Time.cpp" />
+    <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
+    <ClCompile Include="Engine\Graphics\VertexBuffer.cpp" />
+    <ClCompile Include="Engine\Graphics\Viewport.cpp" />
+    <ClCompile Include="Engine\Window\Window.cpp" />
+    <ClCompile Include="Engine\Resource\Resource.cpp" />
+    <ClCompile Include="Engine\System\AssetSystem\Asset\ShaderAsset.cpp" />
+    <ClCompile Include="Engine\Archive\ResourceArchive.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="PixelShader.hlsl">
+    <FxCompile Include="HLSL\PixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -210,7 +224,7 @@
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PSMain</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PSMain</EntryPointName>
     </FxCompile>
-    <FxCompile Include="VertexShader.hlsl">
+    <FxCompile Include="HLSL\VertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -222,8 +236,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Common.hlsl" />
-    <None Include="Transform.hlsl" />
+    <None Include="HLSL\Common.hlsl" />
+    <None Include="HLSL\Transform.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

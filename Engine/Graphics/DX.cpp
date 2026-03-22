@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "DX.h"
-#include "Window.h"
+#include "Window/Window.h"
 #include "RenderContext.h"
 #include "RenderTarget.h"
-#include "Shader.h"
+#include "Shader/Shader.h"
+#include "Debug/Debug.h"
 
 ID3D11Buffer* cBuffer0;
 ConstantBuffer0 cb0;
@@ -12,6 +13,7 @@ namespace F
 {
     ID3D11Device* DX::device = nullptr;
     ID3D11DeviceContext* DX::context = nullptr;
+    IDXGISwapChain* DX::swapChain = nullptr;
 
     DX::DX(Window* window)
     {
@@ -50,8 +52,7 @@ namespace F
         renderContext = new RenderContext(context);
         renderContext->SetRenderTarget(defalutRT);
 
-        // Shader
-        defalutShader = new Shader(L"VertexShader.hlsl", L"PixelShader.hlsl");
+
         
         // Constanct Buffer;
         D3D11_BUFFER_DESC desc = {};
@@ -68,5 +69,5 @@ namespace F
     }
 
     RenderContext* DX::GetRenderContext() { return renderContext; }
-    Shader* DX::GetShader() { return defalutShader; }
 }
+

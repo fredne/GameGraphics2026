@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Time.h"
-#include "Debug.h"
+#include "Debug/Debug.h"
 
 namespace F
 {

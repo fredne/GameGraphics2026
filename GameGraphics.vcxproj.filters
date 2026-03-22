@@ -69,64 +69,69 @@
     <ClInclude Include="main.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Engine\pch.h">
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>Engine\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="Engine\Component\Transform\Transform.h">
       <Filter>Engine\Component\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="Engine\System\Time\Time.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
+    <ClInclude Include="Engine\Graphics\VertexBuffer.h">
       <Filter>DX\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="DX.h">
+    <ClInclude Include="Engine\Graphics\DX.h">
       <Filter>DX</Filter>
     </ClInclude>
-    <ClInclude Include="InputSystem.h">
+    <ClInclude Include="Engine\System\Input\InputSystem.h">
       <Filter>Engine\Input\InputSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
+    <ClInclude Include="Engine\Window\Window.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="Engine.h">
+    <ClInclude Include="Engine\Engine.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="RenderTarget.h">
+    <ClInclude Include="Engine\Graphics\RenderTarget.h">
       <Filter>DX\RenderTarget</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.h">
+    <ClInclude Include="Engine\Graphics\Graphics.h">
       <Filter>DX\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="Engine\Resource\Shader\Shader.h">
       <Filter>DX\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="RenderContext.h">
+    <ClInclude Include="Engine\Graphics\RenderContext.h">
       <Filter>DX\RenderContext</Filter>
     </ClInclude>
-    <ClInclude Include="Viewport.h">
+    <ClInclude Include="Engine\Graphics\Viewport.h">
       <Filter>DX\Viewport</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="Engine\Component\Renderer\Renderer.h">
       <Filter>Engine\Component\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="AssetManager.h">
+    <ClInclude Include="Engine\System\AssetSystem\AssetManager.h">
       <Filter>Engine\AssetManager</Filter>
     </ClInclude>
-    <ClInclude Include="IAsset.h">
+    <ClInclude Include="Engine\System\AssetSystem\Asset\Asset.h">
       <Filter>Engine\Asset</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
+    <ClInclude Include="Engine\Common.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="asd.h" />
-    <ClInclude Include="Debug.h">
+    <ClInclude Include="Engine\System\Debug\Debug.h">
       <Filter>Engine\Debug</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Resource\Material\Material.h" />
+    <ClInclude Include="Engine\System\AssetSystem\Asset\ShaderAsset.h" />
+    <ClInclude Include="Engine\Resource\Resource.h" />
+    <ClInclude Include="Engine\System\AssetSystem\AssetLoader.h" />
+    <ClInclude Include="Engine\System\File\File.h" />
+    <ClInclude Include="Engine\Archive\ResourceArchive.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -135,72 +140,77 @@
     <ClCompile Include="Model.cpp">
       <Filter>Engine\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="Engine\Component\Transform\Transform.cpp">
       <Filter>Engine\Component\Transform</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
+    <ClCompile Include="Engine\System\Time\Time.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
-    <ClCompile Include="VertexBuffer.cpp">
+    <ClCompile Include="Engine\Graphics\VertexBuffer.cpp">
       <Filter>DX\VertexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="DX.cpp">
+    <ClCompile Include="Engine\Graphics\DX.cpp">
       <Filter>DX</Filter>
     </ClCompile>
-    <ClCompile Include="InputSystem.cpp">
+    <ClCompile Include="Engine\System\Input\InputSystem.cpp">
       <Filter>Engine\Input\InputSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
+    <ClCompile Include="Engine\Window\Window.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="Engine.cpp">
+    <ClCompile Include="Engine\Engine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="RenderTarget.cpp">
+    <ClCompile Include="Engine\Graphics\RenderTarget.cpp">
       <Filter>DX\RenderTarget</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.cpp">
+    <ClCompile Include="Engine\Graphics\Graphics.cpp">
       <Filter>DX\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="Engine\Resource\Shader\Shader.cpp">
       <Filter>DX\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="RenderContext.cpp">
+    <ClCompile Include="Engine\Graphics\RenderContext.cpp">
       <Filter>DX\RenderContext</Filter>
     </ClCompile>
-    <ClCompile Include="Viewport.cpp">
+    <ClCompile Include="Engine\Graphics\Viewport.cpp">
       <Filter>DX\Viewport</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
+    <ClCompile Include="Engine\Component\Renderer\Renderer.cpp">
       <Filter>Engine\Component\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
+    <ClCompile Include="Engine\System\AssetSystem\AssetManager.cpp">
       <Filter>Engine\AssetManager</Filter>
     </ClCompile>
-    <ClCompile Include="IAsset.cpp">
+    <ClCompile Include="Engine\System\AssetSystem\Asset\Asset.cpp">
       <Filter>Engine\Asset</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="Engine\pch.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="asd.cpp" />
-    <ClCompile Include="Debug.cpp">
+    <ClCompile Include="Engine\System\Debug\Debug.cpp">
       <Filter>Engine\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Resource\Material\Material.cpp" />
+    <ClCompile Include="Engine\System\AssetSystem\Asset\ShaderAsset.cpp" />
+    <ClCompile Include="Engine\Resource\Resource.cpp" />
+    <ClCompile Include="Engine\System\AssetSystem\AssetLoader.cpp" />
+    <ClCompile Include="Engine\System\File\File.cpp" />
+    <ClCompile Include="Engine\Archive\ResourceArchive.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="PixelShader.hlsl">
+    <FxCompile Include="HLSL\PixelShader.hlsl">
       <Filter>HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="VertexShader.hlsl">
+    <FxCompile Include="HLSL\VertexShader.hlsl">
       <Filter>HLSL</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Common.hlsl">
+    <None Include="HLSL\Common.hlsl">
       <Filter>HLSL</Filter>
     </None>
-    <None Include="Transform.hlsl">
+    <None Include="HLSL\Transform.hlsl">
       <Filter>HLSL</Filter>
     </None>
   </ItemGroup>

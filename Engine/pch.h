@@ -12,6 +12,7 @@
 #pragma comment(lib, "d3dcompiler.lib")
 
 #include <string>
+#include <format>
 #include <vector>
 #include <memory>
 #include <unordered_map>

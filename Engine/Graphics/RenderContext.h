@@ -5,20 +5,20 @@ namespace F
 	class RenderTarget;
 	class RenderContext
 	{
-		ID3D11DeviceContext* mainContext = nullptr;
-
+		static ID3D11DeviceContext* mainContext;
 		RenderTarget* renderTarget;
-		ID3D11RenderTargetView* dxRenderTargetView;
 		Color clearColor;
 
 	public:
-		RenderContext(ID3D11DeviceContext* context);
+		RenderContext();
 		~RenderContext();
 
-		void Draw(int count);
 		void Clear();
+		void Bind();
+		void SwapChain();
 
-		ID3D11DeviceContext* GetMainContext();
+		static ID3D11DeviceContext* GetMainContext();
+		static void SetMainContext(ID3D11DeviceContext* context);
 
 		RenderTarget* CurrentRenderTarget();
 		void SetRenderTarget(RenderTarget* rt);

@@ -70,6 +70,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <AllProjectBMIsArePublic>false</AllProjectBMIsArePublic>
+    <AllProjectIncludesArePublic>false</AllProjectIncludesArePublic>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -113,11 +117,16 @@
       <LanguageStandard>stdcpp23</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)Engine;$(ProjectDir)Engine/Archive;$(ProjectDir)Engine/System;$(ProjectDir)Engine/System/AssetSystem/Asset;$(ProjectDir)Engine/Graphics;$(ProjectDir)Engine/Component;$(ProjectDir)Engine/Resource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Engine;$(ProjectDir)Engine/Archive;$(ProjectDir)Engine/Service;$(ProjectDir)Engine/Service/Input;$(ProjectDir)Engine/Graphics;$(ProjectDir)Engine/Module;$(ProjectDir)Engine/Resource;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCppModule</CompileAs>
+      <EnableModules>true</EnableModules>
+      <BuildStlModules>true</BuildStlModules>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>dxguid.lib;d3d11.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,18 +148,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\System\AssetSystem\AssetLoader.h" />
     <ClInclude Include="Engine\Common.h" />
-    <ClInclude Include="Engine\System\Debug\Debug.h" />
-    <ClInclude Include="Engine\System\AssetSystem\Asset\Asset.h" />
-    <ClInclude Include="Engine\System\AssetSystem\AssetManager.h" />
     <ClInclude Include="Engine\Graphics\DX.h" />
-    <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\pch.h" />
     <ClInclude Include="Engine\Graphics\Graphics.h" />
-    <ClInclude Include="Engine\System\File\File.h" />
+    <ClInclude Include="Engine\Service\Input\Keyboard\Keyboard.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="Engine\System\Input\InputSystem.h" />
     <ClInclude Include="Engine\Resource\Material\Material.h" />
     <ClInclude Include="Model.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -159,34 +162,39 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Engine\Graphics\RenderContext.h" />
-    <ClInclude Include="Engine\Component\Renderer\Renderer.h" />
-    <ClInclude Include="Engine\Graphics\RenderTarget.h" />
+    <ClInclude Include="Engine\Module\Renderer\Renderer.h" />
     <ClInclude Include="Engine\Resource\Shader\Shader.h" />
-    <ClInclude Include="Engine\System\Time\Time.h" />
-    <ClInclude Include="Engine\Component\Transform\Transform.h" />
-    <ClInclude Include="Engine\Graphics\VertexBuffer.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Engine\Graphics\Viewport.h" />
-    <ClInclude Include="Engine\Window\Window.h" />
     <ClInclude Include="Engine\Resource\Resource.h" />
-    <ClInclude Include="Engine\System\AssetSystem\Asset\ShaderAsset.h" />
     <ClInclude Include="Engine\Archive\ResourceArchive.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine\System\AssetSystem\AssetLoader.cpp" />
-    <ClCompile Include="Engine\System\Debug\Debug.cpp" />
-    <ClCompile Include="Engine\System\AssetSystem\Asset\Asset.cpp" />
-    <ClCompile Include="Engine\System\AssetSystem\AssetManager.cpp" />
+    <ClCompile Include="Engine\Agent\Agent.cpp" />
+    <ClCompile Include="Engine\Agent\Agent.ixx" />
+    <ClCompile Include="Engine\Archive\Archive.cpp" />
+    <ClCompile Include="Engine\Archive\Archive.ixx" />
+    <ClCompile Include="Engine\Archive\RenderTargetArchive.ixx" />
+    <ClCompile Include="Engine\Debug\Debug.cpp" />
+    <ClCompile Include="Engine\Debug\Debug.ixx" />
+    <ClCompile Include="Engine\File\File.ixx" />
+    <ClCompile Include="Engine\Graphics\DirectX\Buffer\ConstantBuffer\ConstantBuffer.cpp" />
+    <ClCompile Include="Engine\Graphics\DirectX\Buffer\ConstantBuffer\ConstantBuffer.ixx" />
+    <ClCompile Include="Engine\Graphics\DirectX\Buffer\VertexBuffer\VertexBuffer.ixx" />
     <ClCompile Include="Engine\Graphics\DX.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Graphics\Graphics.cpp" />
-    <ClCompile Include="Engine\System\File\File.cpp" />
+    <ClCompile Include="Engine\File\File.cpp" />
+    <ClCompile Include="Engine\Graphics\DirectX\RenderTarget\RenderTarget.ixx" />
+    <ClCompile Include="Engine\Module\Module.ixx" />
+    <ClCompile Include="Engine\Module\Renderer\Renderer.ixx" />
+    <ClCompile Include="Engine\Module\Transform\Transform.ixx" />
+    <ClCompile Include="Engine\Service\Input\InputSystem.ixx" />
+    <ClCompile Include="Engine\Service\Input\Keyboard\Keyboard.cpp" />
+    <ClCompile Include="Engine\Service\Time\Time.ixx" />
+    <ClCompile Include="Engine\Engine.ixx" />
+    <ClCompile Include="Engine\Window\Window.ixx" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Engine\System\Input\InputSystem.cpp" />
+    <ClCompile Include="Engine\Service\Input\InputSystem.cpp" />
     <ClCompile Include="Engine\Resource\Material\Material.cpp" />
     <ClCompile Include="Model.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
@@ -201,17 +209,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Engine\Graphics\RenderContext.cpp" />
-    <ClCompile Include="Engine\Component\Renderer\Renderer.cpp" />
-    <ClCompile Include="Engine\Graphics\RenderTarget.cpp" />
+    <ClCompile Include="Engine\Module\Renderer\Renderer.cpp" />
+    <ClCompile Include="Engine\Graphics\DirectX\RenderTarget\RenderTarget.cpp" />
     <ClCompile Include="Engine\Resource\Shader\Shader.cpp" />
-    <ClCompile Include="Engine\System\Time\Time.cpp" />
-    <ClCompile Include="Engine\Component\Transform\Transform.cpp" />
-    <ClCompile Include="Engine\Graphics\VertexBuffer.cpp" />
+    <ClCompile Include="Engine\Service\Time\Time.cpp" />
+    <ClCompile Include="Engine\Module\Transform\Transform.cpp" />
+    <ClCompile Include="Engine\Graphics\DirectX\Buffer\VertexBuffer\VertexBuffer.cpp" />
     <ClCompile Include="Engine\Graphics\Viewport.cpp" />
     <ClCompile Include="Engine\Window\Window.cpp" />
     <ClCompile Include="Engine\Resource\Resource.cpp" />
-    <ClCompile Include="Engine\System\AssetSystem\Asset\ShaderAsset.cpp" />
     <ClCompile Include="Engine\Archive\ResourceArchive.cpp" />
+    <ClCompile Include="Engine\Module\Module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="HLSL\PixelShader.hlsl">

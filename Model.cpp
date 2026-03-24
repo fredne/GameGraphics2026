@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "Model.h"
-#include "Transform/Transform.h"
-#include "VertexBuffer.h"
+import VertexBuffer;
 #include "DX.h"
+#include "Keyboard/Keyboard.h"
+import Engine;
+import Transform;
+import ConstantBuffer;
 
 namespace F
 {
@@ -13,9 +16,14 @@ namespace F
     }
     Model::~Model()
     {
+
+    }
+
+    void Model::Release()
+    {
         if (vBuffer)
         {
-            vBuffer->buffer->Release();
+            vBuffer->Release();
             delete vBuffer;
             vBuffer = nullptr;
         }
@@ -27,22 +35,25 @@ namespace F
         }
     }
 
+
     void Model::Update(float dt)
     {
         float move = speed * dt;
-        if (GetAsyncKeyState('A') && 0x0001)
+        if (Keyboard::Get().aKey.IsPressed())
         {
             transform->position.x -= move;
+            b = false;
         }
-        if (GetAsyncKeyState('D') && 0x0001)
+        if (Keyboard::Get().dKey.IsPressed())
         {
             transform->position.x += move;
+            b = true;
         }
-        if (GetAsyncKeyState('W') && 0x0001)
+        if (Keyboard::Get().wKey.IsPressed())
         {
             transform->position.y += move;
         }
-        if (GetAsyncKeyState('S') && 0x0001)
+        if (Keyboard::Get().sKey.IsPressed())
         {
             transform->position.y -= move;
         }
@@ -51,10 +62,18 @@ namespace F
 
     void Model::Render(ID3D11DeviceContext* context)
     {
-        context->IASetVertexBuffers(0, 1, &vBuffer->buffer, &vBuffer->stride, &vBuffer->offset);
-        XMStoreFloat4x4(&cb0.world, transform->GetMatrixInverse());
-        context->UpdateSubresource(cBuffer0, 0, nullptr, &cb0, 0, 0);
-        context->VSSetConstantBuffers(0, 1, &cBuffer0);
+        DX& dx = DX::Get();
+        XMMATRIX model = transform->GetMatrix();
+        XMMATRIX view = Engine::GetCameraMatrix();
+        XMMATRIX proj = XMMatrixIdentity();
+        XMMATRIX mvp = model * view * proj;
+
+        CBuffer0 cb0;
+        XMStoreFloat4x4(&cb0.MVP, XMMatrixTranspose(mvp));
+        dx.cBuffer0->UpdateBuffer(context, cb0);
+        dx.cBuffer0->Bind(context);
+
+        vBuffer->Bind(context);
         context->Draw(vBuffer->vertexCount, 0);
     }
 

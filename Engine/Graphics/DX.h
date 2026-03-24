@@ -1,40 +1,39 @@
 #pragma once
 
-extern ID3D11Buffer* cBuffer0;
-struct ConstantBuffer0
-{
-	DirectX::XMFLOAT4X4 world;
-};
-extern ConstantBuffer0 cb0;
-
-struct IDXGISwapChain;
-
 namespace F
 {
+	
+	class ConstantBuffer0;
 	class RenderContext;
 	class RenderTarget;
 	class Window;
 	class Shader;
 	class DX
 	{
-		static IDXGISwapChain* swapChain;
-		RenderContext* renderContext;
-		RenderTarget* defalutRT;
+		friend class Enigne;
 
-		void InitD3D(Window* window);
+		DX();
 
 	public:
-		static ID3D11Device* device;
-		static ID3D11DeviceContext* context;
+		ComPtr<ID3D11Device> device;
+		ComPtr<ID3D11DeviceContext> mainContext;
+		ComPtr<IDXGISwapChain> swapChain;
+		ConstantBuffer0* cBuffer0;
 
-		DX(Window* window);
+		static DX& Get()
+		{
+			static DX instance;
+			return instance;
+		}
 		~DX();
 
+		void Release();
+
+		void CreateDeviceAndSwapChain();
+		void CreateRenderTargetView(RenderTarget* target);
+		void CreateConstanctBuffer();
 		void Render();
-		static void SwapChain();
-
-		RenderContext* GetRenderContext();
-
+		void SwapChain();
 
 	};
 

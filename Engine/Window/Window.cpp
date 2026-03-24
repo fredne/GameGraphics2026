@@ -1,7 +1,6 @@
 #include "pch.h"
-#include "Window.h"
+import Window;
 
-bool moveInput[(int)Key::Last] = { false, };
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 namespace F
@@ -66,20 +65,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         PostQuitMessage(0);
         break;
     case WM_KEYDOWN:
-        if (wParam == VK_ESCAPE) PostQuitMessage(0);
-        if (wParam == VK_LEFT || wParam == 'A') moveInput[(int)Key::Left] = true;
-        if (wParam == VK_RIGHT || wParam == 'D') moveInput[(int)Key::Right] = true;
-        if (wParam == VK_UP || wParam == 'W') moveInput[(int)Key::Up] = true;
-        if (wParam == VK_DOWN || wParam == 'S') moveInput[(int)Key::Down] = true;
         break;
     case WM_KEYUP:
-        if (wParam == VK_ESCAPE) PostQuitMessage(0);
-        if (wParam == VK_LEFT || wParam == 'A') moveInput[(int)Key::Left] = false;
-        if (wParam == VK_RIGHT || wParam == 'D') moveInput[(int)Key::Right] = false;
-        if (wParam == VK_UP || wParam == 'W') moveInput[(int)Key::Up] = false;
-        if (wParam == VK_DOWN || wParam == 'S') moveInput[(int)Key::Down] = false;
         break;
-
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }

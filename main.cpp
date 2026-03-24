@@ -1,7 +1,9 @@
 #include "pch.h"
-#include "Window/Window.h"
-#include "Engine.h"
+import Window;
+import Engine;
 #include "ResourceArchive.h"
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
 using namespace DirectX;
 using namespace std;
 
@@ -14,6 +16,9 @@ UINT height = 600;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine,_In_ int nCmdShow)
 {
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //_CrtSetBreakAlloc(373);
+
     MSG msg = {};
 
     // Initialize Window
@@ -22,10 +27,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     if (!hWnd) return 0;
 
     // Initialize Engine.
-    F::Engine engine(&window);
-    engine.Initialize();
+    F::Engine& engine = F::Engine::Get();
+    engine.Initialize(&window);
     engine.Run(msg);
-
+    engine.Release();
+  
     return (int) msg.wParam;
 }
 

@@ -52,4 +52,8 @@ namespace F
 	class AssetParam;
 	template<typename T>
 	concept AssetParamBase = std::is_base_of_v<AssetParam, T>;
+
+	class Module;
+	template<typename T>
+	concept ModuleBase = std::is_base_of_v<Module, T>;
 }

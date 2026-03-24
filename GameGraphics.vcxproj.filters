@@ -75,29 +75,8 @@
     <ClInclude Include="Model.h">
       <Filter>Engine\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Component\Transform\Transform.h">
-      <Filter>Engine\Component\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\System\Time\Time.h">
-      <Filter>Engine\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\VertexBuffer.h">
-      <Filter>DX\VertexBuffer</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Graphics\DX.h">
       <Filter>DX</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\System\Input\InputSystem.h">
-      <Filter>Engine\Input\InputSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Window\Window.h">
-      <Filter>Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Engine.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\RenderTarget.h">
-      <Filter>DX\RenderTarget</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Graphics\Graphics.h">
       <Filter>DX\Graphics</Filter>
@@ -111,27 +90,16 @@
     <ClInclude Include="Engine\Graphics\Viewport.h">
       <Filter>DX\Viewport</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Component\Renderer\Renderer.h">
+    <ClInclude Include="Engine\Module\Renderer\Renderer.h">
       <Filter>Engine\Component\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\System\AssetSystem\AssetManager.h">
-      <Filter>Engine\AssetManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\System\AssetSystem\Asset\Asset.h">
-      <Filter>Engine\Asset</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Common.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\System\Debug\Debug.h">
-      <Filter>Engine\Debug</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Resource\Material\Material.h" />
-    <ClInclude Include="Engine\System\AssetSystem\Asset\ShaderAsset.h" />
     <ClInclude Include="Engine\Resource\Resource.h" />
-    <ClInclude Include="Engine\System\AssetSystem\AssetLoader.h" />
-    <ClInclude Include="Engine\System\File\File.h" />
     <ClInclude Include="Engine\Archive\ResourceArchive.h" />
+    <ClInclude Include="Engine\Service\Input\Keyboard\Keyboard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -140,19 +108,19 @@
     <ClCompile Include="Model.cpp">
       <Filter>Engine\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Component\Transform\Transform.cpp">
+    <ClCompile Include="Engine\Module\Transform\Transform.cpp">
       <Filter>Engine\Component\Transform</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\System\Time\Time.cpp">
+    <ClCompile Include="Engine\Service\Time\Time.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Graphics\VertexBuffer.cpp">
+    <ClCompile Include="Engine\Graphics\DirectX\Buffer\VertexBuffer\VertexBuffer.cpp">
       <Filter>DX\VertexBuffer</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Graphics\DX.cpp">
       <Filter>DX</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\System\Input\InputSystem.cpp">
+    <ClCompile Include="Engine\Service\Input\InputSystem.cpp">
       <Filter>Engine\Input\InputSystem</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Window\Window.cpp">
@@ -161,7 +129,7 @@
     <ClCompile Include="Engine\Engine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Graphics\RenderTarget.cpp">
+    <ClCompile Include="Engine\Graphics\DirectX\RenderTarget\RenderTarget.cpp">
       <Filter>DX\RenderTarget</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Graphics\Graphics.cpp">
@@ -176,27 +144,39 @@
     <ClCompile Include="Engine\Graphics\Viewport.cpp">
       <Filter>DX\Viewport</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Component\Renderer\Renderer.cpp">
+    <ClCompile Include="Engine\Module\Renderer\Renderer.cpp">
       <Filter>Engine\Component\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\System\AssetSystem\AssetManager.cpp">
-      <Filter>Engine\AssetManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\System\AssetSystem\Asset\Asset.cpp">
-      <Filter>Engine\Asset</Filter>
     </ClCompile>
     <ClCompile Include="Engine\pch.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\System\Debug\Debug.cpp">
+    <ClCompile Include="Engine\Debug\Debug.cpp">
       <Filter>Engine\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Resource\Material\Material.cpp" />
-    <ClCompile Include="Engine\System\AssetSystem\Asset\ShaderAsset.cpp" />
     <ClCompile Include="Engine\Resource\Resource.cpp" />
-    <ClCompile Include="Engine\System\AssetSystem\AssetLoader.cpp" />
-    <ClCompile Include="Engine\System\File\File.cpp" />
+    <ClCompile Include="Engine\File\File.cpp" />
     <ClCompile Include="Engine\Archive\ResourceArchive.cpp" />
+    <ClCompile Include="Engine\Service\Input\Keyboard\Keyboard.cpp" />
+    <ClCompile Include="Engine\Agent\Agent.cpp" />
+    <ClCompile Include="Engine\Module\Module.cpp" />
+    <ClCompile Include="Engine\Agent\Agent.ixx" />
+    <ClCompile Include="Engine\Module\Module.ixx" />
+    <ClCompile Include="Engine\Module\Transform\Transform.ixx" />
+    <ClCompile Include="Engine\Service\Time\Time.ixx" />
+    <ClCompile Include="Engine\Debug\Debug.ixx" />
+    <ClCompile Include="Engine\Service\Input\InputSystem.ixx" />
+    <ClCompile Include="Engine\File\File.ixx" />
+    <ClCompile Include="Engine\Window\Window.ixx" />
+    <ClCompile Include="Engine\Engine.ixx" />
+    <ClCompile Include="Engine\Archive\RenderTargetArchive.ixx" />
+    <ClCompile Include="Engine\Archive\Archive.ixx" />
+    <ClCompile Include="Engine\Module\Renderer\Renderer.ixx" />
+    <ClCompile Include="Engine\Archive\Archive.cpp" />
+    <ClCompile Include="Engine\Graphics\DirectX\RenderTarget\RenderTarget.ixx" />
+    <ClCompile Include="Engine\Graphics\DirectX\Buffer\VertexBuffer\VertexBuffer.ixx" />
+    <ClCompile Include="Engine\Graphics\DirectX\Buffer\ConstantBuffer\ConstantBuffer.cpp" />
+    <ClCompile Include="Engine\Graphics\DirectX\Buffer\ConstantBuffer\ConstantBuffer.ixx" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="HLSL\PixelShader.hlsl">

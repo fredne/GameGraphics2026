@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Shader.h"
 #include "DX.h"
-#include "Debug/Debug.h"
+import Debug;
 #include <fstream>
 
 std::wstring GetExeFolder()
@@ -32,15 +32,15 @@ namespace F
 		auto vsData = LoadCSO(exeFolder + vsFile);
 		auto psData = LoadCSO(exeFolder + psFile);
 
-		DX::device->CreateVertexShader(vsData.data(), vsData.size(), nullptr, &vertexShader);
-		DX::device->CreatePixelShader(psData.data(), psData.size(), nullptr, &pixelShader);
+		DX::Get().device->CreateVertexShader(vsData.data(), vsData.size(), nullptr, &vertexShader);
+		DX::Get().device->CreatePixelShader(psData.data(), psData.size(), nullptr, &pixelShader);
 
 		std::vector<D3D11_INPUT_ELEMENT_DESC> layoutDescs =
 		{
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		};
-		DX::device->CreateInputLayout(layoutDescs.data(), (UINT)layoutDescs.size(), vsData.data(), vsData.size(), &inputLayout);
+		DX::Get().device->CreateInputLayout(layoutDescs.data(), (UINT)layoutDescs.size(), vsData.data(), vsData.size(), &inputLayout);
 
 	}
 
@@ -64,9 +64,9 @@ namespace F
 
 	Shader::~Shader()
 	{
-		if (inputLayout) inputLayout->Release();
-		if (vertexShader) vertexShader->Release();
-		if (pixelShader) pixelShader->Release();
+		//if (inputLayout) inputLayout->Release();
+		//if (vertexShader) vertexShader->Release();
+		//if (pixelShader) pixelShader->Release();
 	}
 
 	void Shader::LoadHLSL(const std::wstring& vsFile, const std::wstring& psFile)
@@ -86,15 +86,15 @@ namespace F
 			Debug::Log("Pixel Shader Error: " + msg);
 		}
 
-		DX::device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, &vertexShader);
-		DX::device->CreatePixelShader(psBlob->GetBufferPointer(), psBlob->GetBufferSize(), nullptr, &pixelShader);
+		DX::Get().device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, &vertexShader);
+		DX::Get().device->CreatePixelShader(psBlob->GetBufferPointer(), psBlob->GetBufferSize(), nullptr, &pixelShader);
 
 		std::vector<D3D11_INPUT_ELEMENT_DESC> layoutDescs =
 		{
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		};
-		DX::device->CreateInputLayout(layoutDescs.data(), (UINT)layoutDescs.size(), vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), &inputLayout);
+		DX::Get().device->CreateInputLayout(layoutDescs.data(), (UINT)layoutDescs.size(), vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), &inputLayout);
 
 		vsBlob->Release();
 		psBlob->Release();
@@ -104,10 +104,10 @@ namespace F
 
 	void Shader::Bind(ID3D11DeviceContext* context)
 	{
-		context->IASetInputLayout(inputLayout);
+		context->IASetInputLayout(inputLayout.Get());
 		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		context->VSSetShader(vertexShader, nullptr, 0);
-		context->PSSetShader(pixelShader, nullptr, 0);
+		context->VSSetShader(vertexShader.Get(), nullptr, 0);
+		context->PSSetShader(pixelShader.Get(), nullptr, 0);
 	}
 
 }

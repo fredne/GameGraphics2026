@@ -4,23 +4,21 @@
 
 namespace F
 {
-	class Shader : Resource
+	class Shader : public Resource
 	{
 	private:
-		ID3D11InputLayout* inputLayout = nullptr;
-		ID3D11VertexShader* vertexShader = nullptr;
-		ID3D11PixelShader* pixelShader = nullptr;
+		ComPtr<ID3D11InputLayout> inputLayout = nullptr;
+		ComPtr<ID3D11VertexShader> vertexShader = nullptr;
+		ComPtr<ID3D11PixelShader> pixelShader = nullptr;
 
 	public:
 		Shader(const std::wstring& vsFile, const std::wstring& psFile);
-		~Shader();
+		virtual ~Shader();
 
 		std::vector<char> LoadCSO(const std::wstring& filename);
 		void LoadHLSL(const std::wstring& vsFile, const std::wstring& psFile);
 
 		void Bind(ID3D11DeviceContext* context);
-
-
 
 	};
 

@@ -6,10 +6,16 @@
 // DirectX
 #include <d3d11.h>
 #include <d3dcompiler.h>
+
 #ifdef _DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#include <iostream>
 #include <dxgidebug.h>
 #pragma comment(lib, "dxguid.lib")
+#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 #endif
+
 #include <DirectXMath.h>
 using namespace DirectX;
 
@@ -22,9 +28,10 @@ using Microsoft::WRL::ComPtr;
 
 #include <string>
 #include <format>
-#include <vector>
-#include <set>
 #include <memory>
+#include <set>
+#include <vector>
 #include <unordered_map>
+#include <thread>
 
 #include "Common.h"

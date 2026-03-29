@@ -2,8 +2,11 @@
 import Editor;
 import EngineCore;
 import Debug;
+import DX;
+import Window;
 
 #include "imgui.h"
+#include "imgui_demo.cpp"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 
@@ -11,14 +14,28 @@ namespace F
 {
 	void Editor::Initialize()
 	{
-		EngineCore::Get().OnUpdate = [this]() 
+		EngineCore::Get().OnInitialize = [this]()
 		{
-			Update();
+			DX& dx = DX::Get();
+			HWND hWnd = EngineCore::Get().GetWindow()->GetWindowHandle();
+
+			IMGUI_CHECKVERSION();
+			ImGui::CreateContext();
+			ImGuiIO& io = ImGui::GetIO();
+			io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+			io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+			io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+			io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+
+			ImGui::StyleColorsDark();
+
+			ImGui_ImplWin32_Init(hWnd);
+			ImGui_ImplDX11_Init(dx.device.Get(), dx.mainContext.Get());
 		};
-		EngineCore::Get().OnRender = [this]()
-		{
-			Render();
-		};
+
+		EngineCore::Get().OnUpdate = [this]() { Update(); };
+		EngineCore::Get().OnRender = [this]() { Render(); };
+
 	}
 
 	void Editor::Release()
@@ -27,7 +44,7 @@ namespace F
 
 	void Editor::Update()
 	{
-		Debug::Log("GDGDGDGDG");
+		//Debug::Log("GDGDGDGDG");
 	}
 
 	void Editor::Render()
@@ -36,6 +53,33 @@ namespace F
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
+
+		static bool opt_fullscreen = true;
+		static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+
+		// 1. 전체 화면 설정을 위한 윈도우 플래그
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+		if (opt_fullscreen) {
+			const ImGuiViewport* viewport = ImGui::GetMainViewport();
+			ImGui::SetNextWindowPos(viewport->WorkPos);
+			ImGui::SetNextWindowSize(viewport->WorkSize);
+			ImGui::SetNextWindowViewport(viewport->ID);
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+			window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+			window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+		}
+
+		// 2. 배경 역할을 할 투명한 창 시작
+		ImGui::Begin("MyEngineDockSpace", nullptr, window_flags);
+		if (opt_fullscreen) ImGui::PopStyleVar(2);
+
+		// 3. 실제 DockSpace ID 생성 및 실행
+		ImGuiIO& io = ImGui::GetIO();
+		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable) {
+			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+		}
 
 		ImGui::Begin("New Window");
 		static std::string text = "Test text";
@@ -48,8 +92,19 @@ namespace F
 		ImGui::SliderFloat("Count", &count, 0, 100);
 		ImGui::End();
 
+		ImGui::ShowDemoWindow();
+
+
+		ImGui::End();
+
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+		}
 	}
 
 }

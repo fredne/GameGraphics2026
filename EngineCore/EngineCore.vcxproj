@@ -186,8 +186,6 @@
     <ClCompile Include="Engine\Archive\ResourceArchive.ixx" />
     <ClCompile Include="Engine\Archive\ShaderArchive\ShaderArchive.cpp" />
     <ClCompile Include="Engine\Archive\ShaderArchive\ShaderArchive.ixx" />
-    <ClCompile Include="Engine\Editor\Debug\Debug.cpp" />
-    <ClCompile Include="Engine\Editor\Debug\Debug.ixx" />
     <ClCompile Include="Engine\EngineCore.cpp" />
     <ClCompile Include="Engine\EngineCore.ixx" />
     <ClCompile Include="Engine\File\File.cpp" />
@@ -271,7 +269,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Window\Window.cppm" />
+    <ClCompile Include="Window\Window.cpp" />
     <ClCompile Include="Window\Window.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

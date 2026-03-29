@@ -25,7 +25,6 @@ export namespace F
 		void Initialize();
 		void Update();
 		void Render();
-		void Log();
 
 		float DeltaTime() const;
 		float TotalTime() const;

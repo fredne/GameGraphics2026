@@ -38,6 +38,8 @@ export namespace F
 		void BeginRender();
 		void SwapChain();
 
+		void ResizeBackBuffer(uint32_t width, uint32_t height);
+
 	};
 
 }

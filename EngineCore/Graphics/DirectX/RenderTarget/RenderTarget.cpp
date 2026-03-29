@@ -8,9 +8,7 @@ namespace F
 	RenderTarget::RenderTarget(D3D11_VIEWPORT dVp)
 	{
 		viewport = new Viewport(dVp);
-		ComPtr<ID3D11Texture2D> backBuffer = nullptr;
-		DX::Get().swapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
-		DX::Get().device->CreateRenderTargetView(backBuffer.Get(), nullptr, dxRTV.GetAddressOf());
+		Create();
 
 	}
 
@@ -22,12 +20,30 @@ namespace F
 			viewport = nullptr;
 		}
 	}
-	
+
+
+	void RenderTarget::ResizeRenderTarget(D3D11_VIEWPORT dxVp)
+	{
+		Create();
+		viewport->Resize(dxVp);
+	}
+	void RenderTarget::Create()
+	{
+		ComPtr<ID3D11Texture2D> buffer = nullptr;
+		DX::Get().swapChain->GetBuffer(0, IID_PPV_ARGS(&buffer));
+		DX::Get().device->CreateRenderTargetView(buffer.Get(), nullptr, &dxRTV);
+	}
+	void RenderTarget::Reset()
+	{
+		dxRTV.Reset(); dxSRV.Reset();
+	}
+
 	void RenderTarget::SetClearColor(Color color) { clearColor = color; }
 	void RenderTarget::ClearColor(ID3D11DeviceContext* context)
 	{
 		context->ClearRenderTargetView(dxRTV.Get(), clearColor.GetData());
 	}
+
 	void RenderTarget::BindAsTarget(ID3D11DeviceContext* context, ID3D11DepthStencilView* dsv)
 	{
 		context->OMSetRenderTargets(1, dxRTV.GetAddressOf(), dsv);
@@ -39,8 +55,8 @@ namespace F
 		context->PSSetShaderResources(slot, 1, dxSRV.GetAddressOf());
 	}
 
-	const ID3D11RenderTargetView* RenderTarget::GetRTV() { return dxRTV.Get(); }
-	const ID3D11ShaderResourceView* RenderTarget::GetSRV() { return dxSRV.Get(); }
+	ID3D11RenderTargetView* RenderTarget::GetRTV() { return dxRTV.Get(); }
+	ID3D11ShaderResourceView* RenderTarget::GetSRV() { return dxSRV.Get(); }
 
 	void RenderTarget::SetViewport(Viewport* vp)
 	{
@@ -52,7 +68,7 @@ namespace F
 	void RenderTarget::AddDxViewPort(float top, float left, float width, float height, float minDepth, float maxDepth)
 		{ viewport->AddViewPort(top, left, width, height, minDepth, maxDepth); }
 	void RenderTarget::AddDxViewPort(D3D11_VIEWPORT dxViewport)
-		{ viewport->AddViewPort(dxViewport); }
+		{ viewport->AddDxViewPort(dxViewport); }
 
 	Viewport* RenderTarget::GetViewport() { return viewport; }
 

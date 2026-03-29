@@ -2,7 +2,6 @@
 import DX;
 import EngineCore;    
 import Window;
-import Debug;
 import ConstantBuffer;
 import RenderTarget;
 
@@ -79,6 +78,19 @@ namespace F
     {
         //swapChain->Present(0, DXGI_PRESENT_ALLOW_TEARING);
         swapChain->Present(0, 0);
+    }
+
+
+    void DX::ResizeBackBuffer(uint32_t width, uint32_t height)
+    {
+        if (not mainContext) return;
+        mainContext->OMSetRenderTargets(0, nullptr, nullptr);
+        backBuffer->Reset();
+        swapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0);
+        backBuffer->ResizeRenderTarget({ 0, 0,(float)width, (float)height, 0.0, 0.1f });
+
+        SetWindowTextA(EngineCore::Get().GetWindow()->GetWindowHandle(),"adsfdsfdsfsd");
+
     }
 
 }

@@ -11,6 +11,7 @@ export namespace F
 	class Shader;
 	class Model;
 	class RenderContext;
+	class RenderTarget;
 	class Transform;
 	class Monitor;
 	class EngineCore
@@ -24,16 +25,17 @@ export namespace F
 
 		std::vector<std::unique_ptr<Model>> modelList;
 
+		bool alreadyInit;
+		float targetFPS;
 		int fpsCount;
 		int fps;
 		float elapsed;
-		bool alreadyInit;
 
 		EngineCore();
 		void DebugDx();
-		void OnResize(UINT width, UINT height);
 
 	public:
+		std::function<void()> OnInitialize;
 		std::function<void()> OnUpdate;
 		std::function<void()> OnRender;
 
@@ -50,13 +52,16 @@ export namespace F
 		void ProcessInput(MSG& msg);
 		void Update();
 		void Render();
-		
 
+
+		void OnResize(UINT width, UINT height);
 
 		static DirectX::XMMATRIX GetCameraMatrix();
 
 		Window* GetWindow();
 		Shader* GetShader();
+
+		void SetTargetFPS(int fps);
 
 	};
 

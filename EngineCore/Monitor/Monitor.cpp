@@ -1,6 +1,5 @@
 #include "pch.h"
 import Monitor;
-import Debug;
 
 namespace F
 {
@@ -27,14 +26,6 @@ namespace F
             
             for (const auto& mode : displayModes)
                 refreshRateSet.insert((float)mode.RefreshRate.Numerator / mode.RefreshRate.Denominator);
-
-            int c = 0;
-            for (auto& rr : refreshRateSet)
-            {
-                F::Debug::Log(std::format("RefreshRate [{}]: {}", c++, rr));
-            }
-            F::Debug::Log(std::format("Monitor Resolution: {}X{}", resolution.x, resolution.y));
-
         }
 
         output->Release();

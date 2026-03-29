@@ -83,12 +83,6 @@
     <ClCompile Include="Engine\Archive\ResourceArchive.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Editor\Debug\Debug.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Editor\Debug\Debug.ixx">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\File\File.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -215,7 +209,7 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Window\Window.cppm">
+    <ClCompile Include="Window\Window.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Window\Window.ixx">

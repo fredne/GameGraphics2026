@@ -1,5 +1,4 @@
 #include "pch.h"
-import Debug;
 #include <chrono>
 import Time;
 
@@ -22,15 +21,6 @@ namespace F
 		deltaTime = delta.count();
 		prevTime = curTime;
 
-	}
-
-	void Time::Render()
-	{
-	}
-
-	void Time::Log()
-	{
-		F::Debug::Log(std::to_wstring(DeltaTime()).c_str());
 	}
 
 	float Time::DeltaTime() const { return deltaTime * timeScale; }

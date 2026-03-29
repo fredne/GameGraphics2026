@@ -1,6 +1,5 @@
 #include "pch.h"
 import DX;
-import Debug;
 import File;
 #include <fstream>
 
@@ -27,10 +26,17 @@ namespace F
 {
 	Shader::Shader(const std::wstring& vsFile, const std::wstring& psFile)
 	{
-
-		if (!LoadCSO(vsFile, psFile))
+		try
 		{
-			LoadHLSL(vsFile, psFile);
+			if (!LoadCSO(vsFile, psFile))
+			{
+				LoadHLSL(vsFile, psFile);
+			}
+
+		}
+		catch (const std::runtime_error& e)
+		{
+			std::cerr << e.what() << std::endl;
 		}
 
 	}
@@ -44,19 +50,32 @@ namespace F
 
 	void Shader::LoadHLSL(const std::wstring& vsFile, const std::wstring& psFile)
 	{
-		ID3DBlob* vsBlob, * psBlob, * errVBlob, * errPBlob = nullptr;
-		D3DCompileFromFile(vsFile.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "VSMain", "vs_5_0", 0, 0, &vsBlob, &errVBlob);
-		D3DCompileFromFile(psFile.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "PSMain", "ps_5_0", 0, 0, &psBlob, &errPBlob);
+		std::wstring exeFolder = GetExeFolder();
+		std::ifstream file(exeFolder + vsFile, std::ios::binary | std::ios::ate);
+		if (!file)
+			throw std::runtime_error(std::format("Vertex Shader do not exists: {0}", File::WStringToString(exeFolder + vsFile)));
+		file.close();
+		
+		file.open(exeFolder + psFile, std::ios::binary | std::ios::ate);
+		if (!file)
+			throw std::runtime_error(std::format("Pixel Shader do not exists: {}", File::WStringToString(exeFolder + psFile)));
+		file.close();
 
-		if (errVBlob)
+		ID3DBlob* vsBlob, * psBlob, * errVBlob, * errPBlob = nullptr;
+		HRESULT hr = D3DCompileFromFile(vsFile.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "VSMain", "vs_5_0", D3DCOMPILE_DEBUG, 0, &vsBlob, &errVBlob);
+		if (FAILED(hr) and errVBlob)
 		{
-			std::string msg((char*)errVBlob->GetBufferPointer(), errVBlob->GetBufferSize());
-			Debug::Log("Vertex Shader Error: " + msg);
+			char* compileErrors = (char*)(errVBlob->GetBufferPointer());
+			throw std::runtime_error(std::format("Vertex Shader Compile Error: {}", compileErrors));
+			errVBlob->Release();
 		}
-		if (errPBlob)
+		
+		hr = D3DCompileFromFile(psFile.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "PSMain", "ps_5_0", D3DCOMPILE_DEBUG, 0, &psBlob, &errPBlob);
+		if (FAILED(hr) and errPBlob)
 		{
-			std::string msg((char*)errPBlob->GetBufferPointer(), errPBlob->GetBufferSize());
-			Debug::Log("Pixel Shader Error: " + msg);
+			char* compileErrors = (char*)(errPBlob->GetBufferPointer());
+			throw std::runtime_error(std::format("Pixel Shader Compile Error: {}", compileErrors));
+			errPBlob->Release();
 		}
 
 		DX::Get().device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, &vertexShader);
@@ -87,7 +106,7 @@ namespace F
 		}
 		catch (const std::runtime_error& runTimeError)
 		{
-			Debug::LogError(runTimeError.what());
+			OutputDebugStringA(runTimeError.what());
 			return false;
 		}
 

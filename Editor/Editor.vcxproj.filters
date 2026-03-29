@@ -24,6 +24,12 @@
     <ClCompile Include="Editor\Editor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Editor\Debug\Debug.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Debug\Debug.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\HLSL\PixelShader.hlsl" />

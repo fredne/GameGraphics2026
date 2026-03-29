@@ -9,6 +9,6 @@ namespace F
 		shader->Bind(context);
 	}
 	Shader* Material::GetShader() { return shader; }
-	
+
 	void Material::SetShader(Shader* shader) { this->shader = shader; }
 }

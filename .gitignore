@@ -18,6 +18,9 @@ mono_crash.*
 
 # Build results
 [Dd]ebug/
+!Debug/*.cpp
+!Debug/*.h
+!Debu/*.ixx
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/

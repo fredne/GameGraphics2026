@@ -13,8 +13,11 @@ export namespace F
 		Viewport(D3D11_VIEWPORT dViewport);
 		~Viewport();
 
+		void Resize(D3D11_VIEWPORT dxViewport);
+		void Clear();
+
 		void AddViewPort(float top, float left, float width, float height, float minDepth, float maxDepth);
-		void AddViewPort(D3D11_VIEWPORT dxViewport);
+		void AddDxViewPort(D3D11_VIEWPORT dxViewport);
 
 		D3D11_VIEWPORT* GetData();
 		UINT GetCount();

@@ -511,6 +511,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Editor\Debug\Debug.cpp" />
+    <ClCompile Include="Editor\Debug\Debug.ixx" />
     <ClCompile Include="Editor\Editor.cpp" />
     <ClCompile Include="Editor\Editor.ixx" />
     <ClCompile Include="main.cpp" />

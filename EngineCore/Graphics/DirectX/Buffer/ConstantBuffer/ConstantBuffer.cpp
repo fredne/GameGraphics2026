@@ -1,7 +1,6 @@
 #include "pch.h"
 import ConstantBuffer;
 import DX;
-import Debug;
 
 namespace F
 {
@@ -14,7 +13,7 @@ namespace F
 		HRESULT hr = DX::Get().device->CreateBuffer(&desc, 0, &buffer);
 		if (FAILED(hr))
 		{
-			Debug::Log("Constant Buffer 생성 실패");
+			throw("Constant Buffer 생성 실패");
 		}
 	}
 	void ConstantBuffer0::UpdateBuffer(ID3D11DeviceContext* context, const CBuffer0& cb0)

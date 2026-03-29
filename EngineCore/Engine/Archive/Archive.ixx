@@ -1,6 +1,5 @@
 #include "pch.h"
 export module Archive;
-import Debug;
 
 export namespace F
 {
@@ -36,11 +35,6 @@ export namespace F
 			{
 				archive[key] = std::make_unique<U>();
 				item = archive[key].get();
-				Debug::Log(std::format("Register {0} named {1}", typeid(UBase).name(), key));
-			}
-			else
-			{
-				Debug::Log(key + " already exits");
 			}
 
 			return item;
@@ -51,7 +45,6 @@ export namespace F
 		UBase* Fetch(const std::string& key)
 		{
 			if (archive.contains(key)) return dynamic_cast<UBase*>(archive[key].get());
-			Debug::Log(key + " do not exits");
 			return nullptr;
 		}
 

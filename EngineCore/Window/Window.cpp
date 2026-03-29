@@ -17,7 +17,8 @@ namespace F
 	{
         PCWCHAR cTitle = title.c_str();
 
-        RECT rect = { 0, 0, size.x, size.y };
+        //RECT rect = { 0, 0, size.x, size.y };
+        RECT rect = { 0, 0, 600, 600 };
         AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
         WNDCLASSEXW wcex = {};
@@ -49,7 +50,7 @@ namespace F
             return false;
         }
 
-        ShowWindow(hWnd, SW_MAXIMIZE);
+        ShowWindow(hWnd, SW_NORMAL);
         UpdateWindow(hWnd);
 
         return true;
@@ -74,8 +75,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             UINT width = LOWORD(lParam);
             UINT height = HIWORD(lParam);
-            F::EngineCore::Get();
-        }
+            RECT rect = { 0, 0, width, height };
+            GetClientRect(hWnd, &rect);
+            F::EngineCore::Get().OnResize(rect.right, rect.bottom);
+        }   
     case WM_KEYDOWN:
         break;
     case WM_KEYUP:

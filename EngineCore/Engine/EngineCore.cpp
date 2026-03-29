@@ -8,7 +8,6 @@ import RenderTargetArchive;
 import ResourceArchive;
 import ShaderArchive;
 import Transform;
-import Debug;
 import Keyboard;
 import Model;
 import Material;
@@ -22,11 +21,13 @@ namespace F
 {
     Transform* EngineCore::cameraTransform = nullptr;
     EngineCore::EngineCore() :
+        renderContext(nullptr), window(nullptr), monitor(nullptr),
         alreadyInit(false), isRunning(true), 
-        fpsCount(0), fps(0), elapsed(0)
+        targetFPS(0),  fpsCount(0), fps(0), elapsed(0)
     {
         cameraTransform = new Transform();
         cameraTransform->position.x = 1;
+        SetTargetFPS(45);
     }
     EngineCore::~EngineCore()
     {
@@ -51,10 +52,15 @@ namespace F
         renderContext = new RenderContext(window->GetWindowSize());
 
         // ImGui
+        //if (OnInitialize)
+        //    OnInitialize();
+
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO();
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
         io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
 
         ImGui::StyleColorsDark();
@@ -89,7 +95,6 @@ namespace F
     }
     void EngineCore::Release()
     {
-
         // System
         //Time::Get().Release();
         //InputSystem::Get().Release();
@@ -139,6 +144,7 @@ namespace F
 
 
 
+
     void EngineCore::Run(MSG& msg)
     {
         while (isRunning)
@@ -146,6 +152,13 @@ namespace F
             ProcessInput(msg);
             Update();
             Render();
+            float dt = Time::Get().DeltaTime();
+            if (targetFPS - dt > 0)
+            {
+                std::this_thread::sleep_for(
+                    std::chrono::duration_cast<std::chrono::milliseconds>(
+                        std::chrono::duration<float>(targetFPS - dt) ) );
+            }
         }
     }
 
@@ -168,18 +181,8 @@ namespace F
         Time::Get().Update();
         InputSystem::Get().Update();
 
-        //Time::Get().Log();
-
-        if (Keyboard::Get().space.IsPressedNow())
-        {
-            float ts = Time::Get().timeScale;
-            if (ts < 1)
-                Time::Get().timeScale = 1;
-            else
-                Time::Get().timeScale = .1f;
-        }
-
         float dt = Time::Get().DeltaTime();
+    
         elapsed += dt;
         fpsCount++;
         //Debug::Log(std::to_string(fpsCount));
@@ -188,7 +191,17 @@ namespace F
             elapsed -= 1;
             fps = fpsCount;
             fpsCount = 0;
-            //Debug::Log("FPS: " + std::to_string(fps) + ", dt: " + std::to_string(dt));
+            auto msg = std::format("FPS: {}, dt: {}", fps, dt);
+            std::cout << msg << std::endl;
+        }
+
+        if (Keyboard::Get().space.IsPressedNow())
+        {
+            float ts = Time::Get().timeScale;
+            if (ts < 1)
+                Time::Get().timeScale = 1;
+            else
+                Time::Get().timeScale = .1f;
         }
 
         // Model
@@ -215,17 +228,18 @@ namespace F
         }
 
 
-        if(OnRender)
-            OnRender();
-
-
+        //if(OnRender)
+        //    OnRender();
 
         dx.SwapChain();
+
+
     }
 
     void EngineCore::OnResize(UINT width, UINT height)
     {
-        DX::Get().mainContext.Get()->OMSetRenderTargets(0, nullptr, nullptr);
+        DX::Get().ResizeBackBuffer(width, height);
+    
     }
 
 
@@ -240,5 +254,8 @@ namespace F
     }
 
     Window* EngineCore::GetWindow() { return window; }
+
+    void EngineCore::SetTargetFPS(int fps) { targetFPS = 1.f / (fps * 0.5f); }
+
 
 }

@@ -9,8 +9,13 @@ import ResourceArchive;
 import ShaderArchive;
 import Transform;
 import Keyboard;
-import Model;
+import Mesh;
 import Material;
+import Agent;
+import Renderer;
+import PlayerController;
+import World;
+import Module;
 
 #include "imgui.h"
 #include "imgui_impl_win32.h"
@@ -51,9 +56,9 @@ namespace F
         RenderContext::SetMainContext(dx.mainContext.Get());
         renderContext = new RenderContext(window->GetWindowSize());
 
-        // ImGui
-        //if (OnInitialize)
-        //    OnInitialize();
+         //ImGui
+        if (OnInitialize)
+            OnInitialize();
 
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
@@ -69,6 +74,15 @@ namespace F
         ImGui_ImplDX11_Init(dx.device.Get(), dx.mainContext.Get());
 
 
+        // System
+        Time::Get().Initialize();
+        InputSystem::Get().Initialize();
+
+        // Archive
+        ResourceArchive::Get().Initialize();
+        ShaderArchive::Get().Initialize();
+
+
         float offsetY = 0.1f;
         std::vector<Vertex> vertices = {
             {  0.0f,  0.5f + offsetY, 0.5f, 1.0f, 1.0f, 1.0f, 1.0f },
@@ -79,18 +93,17 @@ namespace F
             { -0.5f,  0.5f - offsetY, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f },
             {  0.5f,  0.5f - offsetY, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f },
         };
-        std::unique_ptr<Model> model = std::make_unique<Model>();
-        model->vBuffer = new VertexBuffer(vertices);
-        modelList.push_back(move(model));
+        triangle = new Mesh(vertices);
 
-        // System
-        Time::Get().Initialize();
-        InputSystem::Get().Initialize();
+        world = std::make_unique<World>();
+        std::unique_ptr<Agent> agent = std::make_unique<Agent>();
+        Renderer* renderer = agent->AddModule<Renderer>();
+        renderer->SetMesh(triangle);
+        agent->AddModule<PlayerController>();
 
-        // Archive
-        ResourceArchive::Get().Initialize();
-        ShaderArchive::Get().Initialize();
+        world->AddAgent(std::move(agent));
 
+        world->Initialize();
 
     }
     void EngineCore::Release()
@@ -98,15 +111,16 @@ namespace F
         // System
         //Time::Get().Release();
         //InputSystem::Get().Release();
-
+        if (triangle)
+        {
+            triangle->Release();
+            delete triangle;
+        }
         // Archive
         ResourceArchive::Get().Release();
         ShaderArchive::Get().Release();
 
-        for (auto& model : modelList)
-        {
-            model->Release();
-        }
+        world->Release();
 
         if (cameraTransform)
         {
@@ -141,8 +155,6 @@ namespace F
         debug->Release();
 #endif
     }
-
-
 
 
     void EngineCore::Run(MSG& msg)
@@ -203,12 +215,8 @@ namespace F
             else
                 Time::Get().timeScale = .1f;
         }
-
-        // Model
-        for (auto& model : modelList)
-        {
-            model->Update(dt);
-        }
+            
+        world->Update(dt);
 
         if(OnUpdate) 
             OnUpdate();
@@ -219,14 +227,9 @@ namespace F
     {
         DX& dx = DX::Get();
         dx.BeginRender();
+        ID3D11DeviceContext* context = renderContext->GetMainContext();
 
-        Shader* shader = ShaderArchive::Get().Fetch<Shader>("DefaultShader");
-        shader->Bind(renderContext->GetMainContext());
-        for (auto& model : modelList)
-        {
-            model->Render(renderContext->GetMainContext());
-        }
-
+        world->Render(context);
 
         //if(OnRender)
         //    OnRender();

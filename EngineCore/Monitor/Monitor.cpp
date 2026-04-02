@@ -33,5 +33,10 @@ namespace F
         factory->Release();
 	}
 
+    Monitor::~Monitor()
+    {
+        refreshRateSet.clear();
+    }
+
     const Vector2& Monitor::GetResolution() { return resolution; }
 }

@@ -1,11 +1,13 @@
 #include "pch.h"
 export module Transform;
+import Module;
 
 export namespace F
 {
-    class Transform
+    class Transform : public Module
     {
     public:
+
         XMFLOAT3 position = { 0.f, 0.f, 0.f };
         XMFLOAT3 rotation = { 0.f, 0.f, 0.f };
         XMFLOAT3 scale = { 1.f, 1.f, 1.f };
@@ -19,7 +21,9 @@ export namespace F
 
         XMMATRIX GetMatrixTranpose() { return XMMatrixTranspose(GetMatrix()); }
         XMMATRIX GetMatrixInverse() { return XMMatrixInverse(nullptr, GetMatrix()); }
-    };
 
+        void Update(float dt) override;
+
+    };
 
 }

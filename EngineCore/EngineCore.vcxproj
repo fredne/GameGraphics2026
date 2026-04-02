@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -164,7 +164,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
-    <ClInclude Include="Engine\Module\Renderer\Renderer.h" />
     <ClInclude Include="Graphics\Graphics.h" />
     <ClInclude Include="ImGui\backends\imgui_impl_dx11.h" />
     <ClInclude Include="ImGui\backends\imgui_impl_win32.h" />
@@ -181,6 +180,7 @@
     <ClCompile Include="Engine\Agent\Agent.ixx" />
     <ClCompile Include="Engine\Archive\Archive.cpp" />
     <ClCompile Include="Engine\Archive\Archive.ixx" />
+    <ClCompile Include="Engine\Archive\MeshArchive\MeshArchive.ixx" />
     <ClCompile Include="Engine\Archive\RenderTargetArchive.ixx" />
     <ClCompile Include="Engine\Archive\ResourceArchive.cpp" />
     <ClCompile Include="Engine\Archive\ResourceArchive.ixx" />
@@ -192,6 +192,8 @@
     <ClCompile Include="Engine\File\File.ixx" />
     <ClCompile Include="Engine\Module\Module.cpp" />
     <ClCompile Include="Engine\Module\Module.ixx" />
+    <ClCompile Include="Engine\Module\PlayerController.cpp" />
+    <ClCompile Include="Engine\Module\PlayerController.ixx" />
     <ClCompile Include="Engine\Module\Renderer\Renderer.cpp" />
     <ClCompile Include="Engine\Module\Renderer\Renderer.ixx" />
     <ClCompile Include="Engine\Module\Transform\Transform.cpp" />
@@ -200,12 +202,16 @@
     <ClCompile Include="Engine\Resource\Material\Material.ixx" />
     <ClCompile Include="Engine\Resource\Resource.cpp" />
     <ClCompile Include="Engine\Resource\Resource.ixx" />
+    <ClCompile Include="Engine\Resource\Texture\Texture.cpp" />
+    <ClCompile Include="Engine\Resource\Texture\Texture.ixx" />
     <ClCompile Include="Engine\Service\Input\InputSystem.cpp" />
     <ClCompile Include="Engine\Service\Input\InputSystem.ixx" />
     <ClCompile Include="Engine\Service\Input\Keyboard\Keyboard.cpp" />
     <ClCompile Include="Engine\Service\Input\Keyboard\Keyboard.ixx" />
     <ClCompile Include="Engine\Service\Time\Time.cpp" />
     <ClCompile Include="Engine\Service\Time\Time.ixx" />
+    <ClCompile Include="Engine\World\World.cpp" />
+    <ClCompile Include="Engine\World\World.ixx" />
     <ClCompile Include="Graphics\DirectX\Buffer\ConstantBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\DirectX\Buffer\ConstantBuffer\ConstantBuffer.ixx" />
     <ClCompile Include="Graphics\DirectX\Buffer\VertexBuffer\VertexBuffer.cpp" />
@@ -259,8 +265,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Model.ixx" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Mesh.ixx" />
     <ClCompile Include="Monitor\Monitor.cpp" />
     <ClCompile Include="Monitor\Monitor.ixx" />
     <ClCompile Include="pch.cpp">
@@ -272,7 +278,17 @@
     <ClCompile Include="Window\Window.cpp" />
     <ClCompile Include="Window\Window.ixx" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\directxtex_uwp.2025.10.28.1\build\native\directxtex_uwp.targets" Condition="Exists('..\packages\directxtex_uwp.2025.10.28.1\build\native\directxtex_uwp.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>이 프로젝트는 이 컴퓨터에 없는 NuGet 패키지를 참조합니다. 해당 패키지를 다운로드하려면 NuGet 패키지 복원을 사용하십시오. 자세한 내용은 http://go.microsoft.com/fwlink/?LinkID=322105를 참조하십시오. 누락된 파일은 {0}입니다.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\directxtex_uwp.2025.10.28.1\build\native\directxtex_uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtex_uwp.2025.10.28.1\build\native\directxtex_uwp.targets'))" />
+  </Target>
 </Project>

@@ -9,11 +9,13 @@ export namespace F
 	class DX;
 	class Window;
 	class Shader;
-	class Model;
+	class Mesh;
 	class RenderContext;
 	class RenderTarget;
 	class Transform;
 	class Monitor;
+	class Agent;
+	class World;
 	class EngineCore
 	{
 	private:
@@ -23,7 +25,9 @@ export namespace F
 		bool isRunning;
 		static Transform* cameraTransform;
 
-		std::vector<std::unique_ptr<Model>> modelList;
+		Mesh* triangle;
+
+		std::unique_ptr<World> world;
 
 		bool alreadyInit;
 		float targetFPS;
@@ -52,7 +56,6 @@ export namespace F
 		void ProcessInput(MSG& msg);
 		void Update();
 		void Render();
-
 
 		void OnResize(UINT width, UINT height);
 

@@ -11,6 +11,7 @@ export namespace F
 
 	public:
 		Monitor();
+		~Monitor();
 
 		const Vector2& GetResolution();
 

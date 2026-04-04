@@ -50,7 +50,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Mesh.cpp">
+    <ClCompile Include="Engine\Resource\Mesh\Mesh.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Agent\Agent.cpp">
@@ -71,13 +71,13 @@
     <ClCompile Include="Engine\Archive\Archive.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Archive\RenderTargetArchive.ixx">
+    <ClCompile Include="Engine\Archive\RenderTargetArchive\RenderTargetArchive.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Archive\ResourceArchive.cpp">
+    <ClCompile Include="Engine\Archive\ResourceArchive\ResourceArchive.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Archive\ResourceArchive.ixx">
+    <ClCompile Include="Engine\Archive\ResourceArchive\ResourceArchive.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Engine\File\File.cpp">
@@ -218,7 +218,7 @@
     <ClCompile Include="Engine\Resource\Material\Material.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.ixx">
+    <ClCompile Include="Engine\Resource\Mesh\Mesh.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Monitor\Monitor.ixx">
@@ -233,10 +233,10 @@
     <ClCompile Include="Engine\Resource\Texture\Texture.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Module\PlayerController.ixx">
+    <ClCompile Include="Engine\Module\UserModule\PC\PlayerController.ixx">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Module\PlayerController.cpp">
+    <ClCompile Include="Engine\Module\UserModule\PC\PlayerController.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Engine\World\World.ixx">
@@ -246,6 +246,57 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Archive\MeshArchive\MeshArchive.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Archive\MeshArchive\MeshArchive.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Module\Camera\Camera.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Module\Camera\Camera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Agent\Camera\CameraAgent.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Agent\Camera\CameraAgent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Module\UserModule\PC\PC.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Module\UserModule\PC\PC.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Module\UserModule\TestModule\TestModule.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Module\UserModule\TestModule\TestModule.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Service\Config\Config.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Service\Config\Config.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\World\TestWorld\TestWorld.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\World\TestWorld\TestWorld.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Archive\WorldArchive\WorldArchive.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Archive\WorldArchive\WorldArchive.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Service\World\WorldManager.ixx">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Service\World\WorldManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

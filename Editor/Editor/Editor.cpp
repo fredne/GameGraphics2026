@@ -12,39 +12,56 @@ import Window;
 
 namespace F
 {
-	void Editor::Initialize()
+	Editor::Editor()
 	{
-		EngineCore::Get().OnInitialize = [this]()
-		{
-			DX& dx = DX::Get();
-			HWND hWnd = EngineCore::Get().GetWindow()->GetWindowHandle();
-
-			IMGUI_CHECKVERSION();
-			ImGui::CreateContext();
-			ImGuiIO& io = ImGui::GetIO();
-			io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-			io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-			io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-			io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
-
-			ImGui::StyleColorsDark();
-
-			ImGui_ImplWin32_Init(hWnd);
-			ImGui_ImplDX11_Init(dx.device.Get(), dx.mainContext.Get());
-		};
-
+		EngineCore::Get().OnInitialize = [this]() { Initialize(); };
+		EngineCore::Get().OnRelease = [this]() { Release(); };
 		EngineCore::Get().OnUpdate = [this]() { Update(); };
 		EngineCore::Get().OnRender = [this]() { Render(); };
 
 	}
 
+	void Editor::Initialize()
+	{
+		ImGuiInit();
+	}
+	void Editor::ImGuiInit()
+	{
+		if (imguiInit) return;
+
+		imguiInit = true;
+
+		DX& dx = DX::Get();
+		HWND hWnd = EngineCore::Get().GetWindow()->GetWindowHandle();
+
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO();
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+
+		ImGui::StyleColorsDark();
+
+		ImGui_ImplWin32_Init(hWnd);
+		ImGui_ImplDX11_Init(dx.device.Get(), dx.mainContext.Get());
+
+	}
+
 	void Editor::Release()
 	{
+		if (not imguiInit or imguiRelease) return;
+		imguiRelease = true;
+
+		ImGui_ImplDX11_Shutdown();
+		ImGui_ImplWin32_Shutdown();
+		ImGui::DestroyContext();
 	}
 
 	void Editor::Update()
 	{
-		//Debug::Log("GDGDGDGDG");
+		//Debug::Log("Editor Update");
 	}
 
 	void Editor::Render()
@@ -80,7 +97,8 @@ namespace F
 			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 		}
-
+		
+		// 4. 테스트용 창
 		ImGui::Begin("New Window");
 		static std::string text = "Test text";
 		ImGui::Text(text.c_str());
@@ -93,7 +111,6 @@ namespace F
 		ImGui::End();
 
 		ImGui::ShowDemoWindow();
-
 
 		ImGui::End();
 

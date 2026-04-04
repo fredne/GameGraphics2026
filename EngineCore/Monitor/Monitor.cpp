@@ -38,5 +38,4 @@ namespace F
         refreshRateSet.clear();
     }
 
-    const Vector2& Monitor::GetResolution() { return resolution; }
 }

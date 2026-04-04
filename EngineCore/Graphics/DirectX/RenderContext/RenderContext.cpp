@@ -7,7 +7,7 @@ import Window;
 namespace F
 {
 	ID3D11DeviceContext* RenderContext::mainContext = nullptr;
-	RenderContext::RenderContext(Vector2 size) :
+	RenderContext::RenderContext(Vector2<float> size) :
 		renderTarget(nullptr)
 	{
 

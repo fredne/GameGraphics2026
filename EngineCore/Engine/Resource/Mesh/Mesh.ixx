@@ -12,16 +12,15 @@ export namespace F
     public:
         VertexBuffer* vBuffer;
 
-        Mesh(std::vector<Vertex>& vertexList);
+        Mesh();
         ~Mesh();
 
+        void Initialize(std::vector<Vertex>& vertexList);
         void Release();
-
-        void Update(float dt);
 
         void Bind(ID3D11DeviceContext* context);
 
-        uint32_t GetVertexCount() { return vBuffer->vertexCount; }
+        uint32_t GetVertexCount() const { return vBuffer->vertexCount; }
 
     };
 

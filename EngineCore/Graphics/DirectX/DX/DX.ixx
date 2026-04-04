@@ -3,7 +3,7 @@ export module DX;
 export import RenderContext;
 export import RenderTarget;
 export import Shader;
-export import ConstantBuffer;
+import ConstantBuffer;
 
 export namespace F
 {
@@ -23,7 +23,9 @@ export namespace F
 		ComPtr<ID3D11DeviceContext> mainContext;
 		ComPtr<IDXGISwapChain> swapChain;
 		RenderTarget* backBuffer;
-		ConstantBuffer0* cBuffer0;
+
+		ConstantBuffer<CBuffer0>* cBuffer0;
+		ConstantBuffer<CBuffer3>* cBuffer3;
 
 		static DX& Get()
 		{
@@ -39,6 +41,8 @@ export namespace F
 		void SwapChain();
 
 		void ResizeBackBuffer(uint32_t width, uint32_t height);
+
+		Vector2<uint32_t> GetCurrentRenderSize();
 
 	};
 

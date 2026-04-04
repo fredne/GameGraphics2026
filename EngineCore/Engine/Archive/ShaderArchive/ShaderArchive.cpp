@@ -6,7 +6,7 @@ namespace F
 	void ShaderArchive::Initialize()
 	{
 		// Shader
-		auto defaultShader = std::make_unique<Shader>(L"VertexShader.cso", L"PixelShader.cso");
-		archive["DefaultShader"] = std::move(defaultShader);
+		Register<Shader>("DefaultShader")->Initialize(L"VertexShader.cso", L"PixelShader.cso");
+
 	}
 }

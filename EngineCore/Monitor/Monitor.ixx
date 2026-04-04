@@ -7,13 +7,13 @@ export namespace F
 	{
 	private:
 		std::set<float> refreshRateSet;
-		Vector2 resolution;
+		Vector2<float> resolution;
 
 	public:
 		Monitor();
 		~Monitor();
 
-		const Vector2& GetResolution();
+		const Vector2<float>& GetResolution() { return resolution; }
 
 
 	};

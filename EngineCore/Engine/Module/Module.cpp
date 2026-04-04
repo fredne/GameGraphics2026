@@ -3,8 +3,9 @@ import Module;
 
 namespace F
 {
-	Module::~Module()
+	void Module::Initialize()
 	{
+
 	}
 
 	void Module::Render(ID3D11DeviceContext* context)

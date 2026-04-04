@@ -1,40 +1,44 @@
 #include "pch.h"
 export module ConstantBuffer;
 
-export struct CBuffer0
-{
-	DirectX::XMFLOAT4X4 MVP;
-
-	CBuffer0() {}
-	CBuffer0(const CBuffer0& other)
-	{
-		MVP = other.MVP;
-	}
-
-};
-
 export namespace F
 {
-	class ConstantBuffer0
+	template<typename CBufferN>
+	requires std::is_base_of_v<CBuffer, CBufferN>
+	class ConstantBuffer
 	{
 	private:
 		ComPtr<ID3D11Buffer> buffer;
 
 	public:
-		CBuffer0 data;
+		CBufferN data;
 
-		ConstantBuffer0();
+		ConstantBuffer(ID3D11Device* device)
+		{
+			D3D11_BUFFER_DESC desc = {};
+			desc.ByteWidth = sizeof(CBufferN);
+			desc.Usage = D3D11_USAGE_DEFAULT;
+			desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+			HRESULT hr = device->CreateBuffer(&desc, 0, &buffer);
+			if (FAILED(hr))
+			{
+				throw("Constant Buffer 생성 실패");
+			}
+		}
 
-		//void StoreData(XMMATRIX mvp)
-		//{
-		//	XMStoreFloat4x4(&MVP, mvp);
-		//}
+		void BindVS(ID3D11DeviceContext* context, uint32_t slot)
+		{
+			context->UpdateSubresource(buffer.Get(), 0, nullptr, &data, 0, 0);
+			context->VSSetConstantBuffers(slot, 1, buffer.GetAddressOf());
+		}
+		void BindPS(ID3D11DeviceContext* context, uint32_t slot)
+		{
+			context->UpdateSubresource(buffer.Get(), 0, nullptr, &data, 0, 0);
+			context->PSSetConstantBuffers(slot, 1, buffer.GetAddressOf());
+		}
 
-		void UpdateBuffer(ID3D11DeviceContext* context, const CBuffer0& cb0);
-		void Bind(ID3D11DeviceContext* context);
+		ID3D11Buffer* GetBufferRaw() { return buffer.Get(); }
 
-		//ComPtr<ID3D11Buffer>& GetBuffer();
-		ID3D11Buffer* GetBufferRaw();
 	};
 
 

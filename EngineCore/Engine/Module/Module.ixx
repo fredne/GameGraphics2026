@@ -13,12 +13,18 @@ export namespace F
 	protected:
 		Agent* agent;
 
+		virtual void Initialize();
+
 	public:
-		virtual ~Module();
+		virtual ~Module() = default;
+
 		virtual void Update(float dt) = 0;
 		virtual void Render(ID3D11DeviceContext* context);
+		
 
 	};
 
-}
-;
+	
+
+};
+

@@ -4,6 +4,12 @@ export namespace F
 {
 	class Editor
 	{
+	private:
+		bool imguiInit = false;
+		bool imguiRelease = false;
+	
+		Editor();
+	
 	public:
 		static Editor& Get()
 		{
@@ -12,6 +18,7 @@ export namespace F
 		}
 
 		void Initialize();
+		void ImGuiInit();
 		void Release();
 		void Update();
 		void Render();

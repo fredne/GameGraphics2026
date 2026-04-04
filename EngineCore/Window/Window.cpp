@@ -15,10 +15,11 @@ namespace F
 
     bool Window::InitWindow(HINSTANCE hInstance)
 	{
-        PCWCHAR cTitle = title.c_str();
+        const wchar_t* cTitle = title.c_str();
 
-        //RECT rect = { 0, 0, size.x, size.y };
-        RECT rect = { 0, 0, 600, 600 };
+        size.x = 800;
+		size.y = 600;
+        RECT rect = { 0, 0, size.x, size.y };
         AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
         WNDCLASSEXW wcex = {};
@@ -56,11 +57,6 @@ namespace F
         return true;
 	}
 
-    HWND Window::GetWindowHandle() const { return hWnd; }
-
-    Vector2 Window::GetWindowSize() { return size; }
-
-
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -75,14 +71,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             UINT width = LOWORD(lParam);
             UINT height = HIWORD(lParam);
-            RECT rect = { 0, 0, width, height };
-            GetClientRect(hWnd, &rect);
-            F::EngineCore::Get().OnResize(rect.right, rect.bottom);
+            F::EngineCore::Get().OnResize(width, height);
         }   
-    case WM_KEYDOWN:
-        break;
-    case WM_KEYUP:
-        break;
     default:
         break;
     }

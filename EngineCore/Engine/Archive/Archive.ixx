@@ -3,55 +3,64 @@ export module Archive;
 
 export namespace F
 {
-	template<typename T,typename U>
+	template<typename TSelf, typename TItem>
 	class Archive
 	{
 		Archive(const Archive&) = delete;
-		Archive& operator=(const Archive&) = delete;
 		Archive(Archive&&) = delete;
+		Archive& operator=(const Archive&) = delete;
 		Archive& operator=(Archive&&) = delete;
 
 	protected:
-		std::unordered_map<std::string, std::unique_ptr<U>> archive;
+		std::unordered_map<std::string, std::unique_ptr<TItem>> archive;
 		Archive() = default;
 
 	public:
-		static T& Get()
+		static TSelf& Get()
 		{
-			static T instance;
+			static TSelf instance;
 			return instance;
 		}
-		virtual ~Archive() {}
+		virtual ~Archive() { };
 
 		virtual void Initialize() { };
 		virtual void Release();
 
-		template<typename UBase>
-		requires std::is_base_of_v<U, UBase>
-		UBase* Register(const std::string& key)
+		template<typename TItemBase>
+		requires std::derived_from<TItemBase, TItem>
+		TItemBase* Register(const std::string& key)
 		{
-			UBase* item = archive[key].get();
+			TItemBase* item = dynamic_cast<TItemBase*>(archive[key].get());
 			if (item == nullptr)
 			{
-				archive[key] = std::make_unique<U>();
-				item = archive[key].get();
+				archive[key] = std::make_unique<TItemBase>();
+				item = dynamic_cast<TItemBase*>(archive[key].get());
+			#ifdef _DEBUG
+				std::cout << std::format("[{}] Register item with key: {}\n", typeid(TSelf).name(), key);
+			#endif
+				
 			}
 
 			return item;
 		}
 
-		template<typename UBase>
-		requires std::is_base_of_v<U, UBase>
-		UBase* Fetch(const std::string& key)
+		template<typename TItemBase>
+		requires std::derived_from<TItemBase, TItem>
+		TItemBase* Fetch(const std::string& key)
 		{
-			if (archive.contains(key)) return dynamic_cast<UBase*>(archive[key].get());
+			if (archive.contains(key)) 
+				return dynamic_cast<TItemBase*>(archive[key].get());
+		#ifdef _DEBUG
+			std::cout << std::format("[{}] \033[31m[Error] \033[0mFailed to fetch item with key: {}\n", typeid(TSelf).name(), key);
+		#endif 
+
 			return nullptr;
 		}
 
 	};
 
-	template<typename T, typename U>
-	void Archive<T, U>::Release()
+	template<typename TSelf, typename TItem>
+	void Archive<TSelf, TItem>::Release()
 	{
 		archive.clear();
 	}

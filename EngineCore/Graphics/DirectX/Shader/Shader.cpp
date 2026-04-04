@@ -24,7 +24,17 @@ std::wstring GetExeFolder()
 
 namespace F
 {
-	Shader::Shader(const std::wstring& vsFile, const std::wstring& psFile)
+	Shader::Shader()
+	{ }
+
+	Shader::~Shader()
+	{
+		//if (inputLayout) inputLayout->Release();
+		//if (vertexShader) vertexShader->Release();
+		//if (pixelShader) pixelShader->Release();
+	}
+
+	void Shader::Initialize(const std::wstring& vsFile, const std::wstring& psFile)
 	{
 		try
 		{
@@ -38,14 +48,6 @@ namespace F
 		{
 			std::cerr << e.what() << std::endl;
 		}
-
-	}
-
-	Shader::~Shader()
-	{
-		//if (inputLayout) inputLayout->Release();
-		//if (vertexShader) vertexShader->Release();
-		//if (pixelShader) pixelShader->Release();
 	}
 
 	void Shader::LoadHLSL(const std::wstring& vsFile, const std::wstring& psFile)
@@ -84,7 +86,7 @@ namespace F
 		std::vector<D3D11_INPUT_ELEMENT_DESC> layoutDescs =
 		{
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		};
 		DX::Get().device->CreateInputLayout(layoutDescs.data(), (UINT)layoutDescs.size(), vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), &inputLayout);
 
@@ -116,7 +118,7 @@ namespace F
 		std::vector<D3D11_INPUT_ELEMENT_DESC> layoutDescs =
 		{
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		};
 		DX::Get().device->CreateInputLayout(layoutDescs.data(), (UINT)layoutDescs.size(), vsData.data(), vsData.size(), &inputLayout);
 

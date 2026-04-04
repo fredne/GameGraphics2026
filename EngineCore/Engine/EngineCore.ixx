@@ -21,25 +21,23 @@ export namespace F
 	private:
 		RenderContext* renderContext;
 		Window* window;
+		MSG msg = {};
 		Monitor* monitor;
 		bool isRunning;
-		static Transform* cameraTransform;
-
-		Mesh* triangle;
-
-		std::unique_ptr<World> world;
+		//static Transform* cameraTransform;
 
 		bool alreadyInit;
+		bool alreadyRelease;
+
 		float targetFPS;
-		int fpsCount;
-		int fps;
-		float elapsed;
+		bool enableFrameLimit;
 
 		EngineCore();
 		void DebugDx();
 
 	public:
 		std::function<void()> OnInitialize;
+		std::function<void()> OnRelease;
 		std::function<void()> OnUpdate;
 		std::function<void()> OnRender;
 
@@ -52,19 +50,22 @@ export namespace F
 
 		void Initialize(HINSTANCE hInstance);
 		void Release();
-		void Run(MSG& msg);
-		void ProcessInput(MSG& msg);
+		void Run();
+		void ProcessInput();
 		void Update();
 		void Render();
 
-		void OnResize(UINT width, UINT height);
+		void OnResize(uint32_t width, uint32_t height);
+		void OnResize(const Vector2<uint32_t>& resolution);
 
-		static DirectX::XMMATRIX GetCameraMatrix();
+		Window* GetWindow() { return window; }
+		MSG& GetMsg() { return msg; }
 
-		Window* GetWindow();
-		Shader* GetShader();
-
+		void EnableFrameLimit(bool enable);
 		void SetTargetFPS(int fps);
+		void LimitFPS();
+
+		void SetFullscreen(bool fullscreen);
 
 	};
 

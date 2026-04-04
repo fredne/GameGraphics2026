@@ -7,11 +7,13 @@ namespace F
 {
 	Agent::Agent() :
 		moduleList()
-	{ }
+	{
+		AddModule<Transform>();
+	}
 
 	void Agent::Initialize()
 	{
-		AddModule<Transform>();
+		
 	}
 	void Agent::Update(float dt)
 	{
@@ -28,7 +30,6 @@ namespace F
 			mod->Render(context);
 		}
 	}
-
 
 	void Agent::Release()
 	{

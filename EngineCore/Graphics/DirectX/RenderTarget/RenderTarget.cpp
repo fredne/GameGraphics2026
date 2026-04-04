@@ -72,6 +72,10 @@ namespace F
 
 	Viewport* RenderTarget::GetViewport() { return viewport; }
 
-
+	Vector2<uint32_t> RenderTarget::GetCurrentRenderSize()
+	{
+		D3D11_VIEWPORT dxVp = viewport->GetDxViewPort(0);
+		return { (uint32_t)dxVp.Width, (uint32_t)dxVp.Height };
+	}
 
 }

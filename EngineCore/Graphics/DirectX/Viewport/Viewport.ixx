@@ -19,8 +19,10 @@ export namespace F
 		void AddViewPort(float top, float left, float width, float height, float minDepth, float maxDepth);
 		void AddDxViewPort(D3D11_VIEWPORT dxViewport);
 
-		D3D11_VIEWPORT* GetData();
-		UINT GetCount();
+		D3D11_VIEWPORT* GetData() { return viewportList.data(); }
+		D3D11_VIEWPORT GetDxViewPort(uint32_t index) { return viewportList[index]; }
+		UINT GetCount() { return viewportList.size(); }
+
 	};
 
 }

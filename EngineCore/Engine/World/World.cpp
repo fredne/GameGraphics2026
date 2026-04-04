@@ -5,6 +5,20 @@ import Module;
 
 namespace F
 {
+	World::~World() 
+	{
+		//Release();
+	}
+
+	void World::Enter()
+	{
+
+	}
+
+	void World::Exit()
+	{
+	}
+
 	void World::Initialize()
 	{
 		for (auto& agent : agentList)
@@ -19,6 +33,7 @@ namespace F
 		{
 			agent->Release();
 		}
+		agentList.clear();
 	}
 
 	void World::Update(float dt)

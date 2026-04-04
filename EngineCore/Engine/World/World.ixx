@@ -10,6 +10,10 @@ export namespace F
 		std::vector<std::unique_ptr<Agent>> agentList;
 
 	public:
+		virtual ~World();
+
+		virtual void Enter();
+		virtual void Exit();
 
 		void Initialize();
 		void Release();

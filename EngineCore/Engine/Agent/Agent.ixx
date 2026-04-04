@@ -1,6 +1,7 @@
 #include "pch.h"
 export module Agent;
 import Module;
+export import Transform;
 
 export namespace F
 {
@@ -12,6 +13,7 @@ export namespace F
 
 	public:
 		Agent();
+		virtual ~Agent() { };
 		void Initialize();
 		void Update(float dt);
 		void Render(ID3D11DeviceContext* context);
@@ -22,6 +24,7 @@ export namespace F
 		{
 			std::unique_ptr<T> mod = std::make_unique<T>();
 			mod->agent = this;
+			mod->Initialize();
 			T* modRaw = mod.get();
 			moduleList.push_back(std::move(mod));
 			return modRaw;
@@ -32,10 +35,8 @@ export namespace F
 		{
 			for (auto& mod : moduleList)
 			{
-				if (dynamic_cast<T*>(mod.get()))
-				{
-					return dynamic_cast<T*>(mod.get());
-				}
+				if (auto m = dynamic_cast<T*>(mod.get()))
+					return m;
 			}
 
 			std::cerr << typeid(T).name() << " do not exist" << std::endl;

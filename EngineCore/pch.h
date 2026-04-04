@@ -33,5 +33,6 @@ using Microsoft::WRL::ComPtr;
 #include <vector>
 #include <unordered_map>
 #include <thread>
+#include <type_traits>
 
 #include "Common.h"

@@ -11,10 +11,10 @@ export namespace F
 		ComPtr<ID3D11PixelShader> pixelShader = nullptr;
 
 	public:
-		Shader(const std::wstring& vsFile, const std::wstring& psFile);
+		Shader();
 		virtual ~Shader();
 
-
+		void Initialize(const std::wstring& vsFile, const std::wstring& psFile);
 		void LoadHLSL(const std::wstring& vsFile, const std::wstring& psFile);
 		bool LoadCSO(const std::wstring& vsFile, const std::wstring& psFile);
 		std::vector<char> GetCSOData(const std::string& fileName);

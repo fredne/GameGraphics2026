@@ -18,19 +18,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     timeBeginPeriod(1);
 
     // Initialize Engine.
+    Editor::Get();
     EngineCore::Get().Initialize(hInstance);
-    Editor::Get().Initialize();
 
-    MSG msg = {};
-    EngineCore::Get().Run(msg);
+    EngineCore::Get().Run();
 
-    Editor::Get().Release();
+	// Release Engine.
     EngineCore::Get().Release();
 
     timeEndPeriod(1);
 
-
-    return (int)msg.wParam;
+	system("pause");
+    
+    return (int)EngineCore::Get().GetMsg().wParam;
 }
 
 

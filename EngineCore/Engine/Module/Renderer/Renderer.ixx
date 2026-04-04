@@ -13,6 +13,7 @@ export namespace F
 	private:
 		Shader* shader;
 		Mesh* mesh;
+		Color color;
 
 	public:
 		Renderer();
@@ -21,7 +22,7 @@ export namespace F
 		void Render(ID3D11DeviceContext* context) override;
 
 		void SetMesh(Mesh* mesh) { this->mesh = mesh; }
-
+		void SetColor(const Color& color) { this->color = color; }
 
 
 

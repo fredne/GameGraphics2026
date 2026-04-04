@@ -5,8 +5,6 @@ import Window;
 import ConstantBuffer;
 import RenderTarget;
 
-ComPtr<ID3D11Buffer> cBuffer0;
-
 namespace F
 {
     DX::DX()
@@ -32,6 +30,7 @@ namespace F
     void DX::Release()
     {
         if (cBuffer0) delete cBuffer0; cBuffer0 = nullptr;
+        if (cBuffer3) delete cBuffer3; cBuffer3 = nullptr;
         if (backBuffer) delete backBuffer; backBuffer = nullptr;
     }
 
@@ -65,7 +64,9 @@ namespace F
 
     void DX::CreateConstanctBuffer()
     {
-        cBuffer0 = new ConstantBuffer0();
+		auto device = this->device.Get();
+        cBuffer0 = new ConstantBuffer<CBuffer0>(device);
+		cBuffer3 = new ConstantBuffer<CBuffer3>(device);
     }
 
     void DX::BeginRender()
@@ -89,8 +90,11 @@ namespace F
         swapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0);
         backBuffer->ResizeRenderTarget({ 0, 0,(float)width, (float)height, 0.0, 0.1f });
 
-        SetWindowTextA(EngineCore::Get().GetWindow()->GetWindowHandle(),"adsfdsfdsfsd");
+    }
 
+    Vector2<uint32_t> DX::GetCurrentRenderSize()
+    {
+		return backBuffer->GetCurrentRenderSize();
     }
 
 }

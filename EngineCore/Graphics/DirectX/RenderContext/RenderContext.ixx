@@ -12,7 +12,7 @@ export namespace F
 		Color clearColor;
 
 	public:
-		RenderContext(Vector2 size);
+		RenderContext(Vector2<float> size);
 		~RenderContext();
 
 		static ID3D11DeviceContext* GetMainContext();

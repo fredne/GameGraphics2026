@@ -9,14 +9,19 @@ import ConstantBuffer;
 
 namespace F
 {
-    Mesh::Mesh(std::vector<Vertex>& vertexList) :
-        vBuffer(new VertexBuffer(vertexList))
+    Mesh::Mesh() :
+        vBuffer(nullptr)
     {
 
     }
     Mesh::~Mesh()
     {
+		Release();
+    }
 
+    void Mesh::Initialize(std::vector<Vertex>& vertexList)
+    {
+        vBuffer = new VertexBuffer(vertexList);
     }
 
     void Mesh::Release()
@@ -27,12 +32,6 @@ namespace F
             delete vBuffer;
             vBuffer = nullptr;
         }
-
-    }
-
-
-    void Mesh::Update(float dt)
-    {
 
     }
 

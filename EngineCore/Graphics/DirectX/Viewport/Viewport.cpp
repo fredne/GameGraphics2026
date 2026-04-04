@@ -33,6 +33,4 @@ namespace F
 	void Viewport::AddDxViewPort(D3D11_VIEWPORT dxViewport)
 		{ viewportList.push_back(dxViewport); }
 
-	D3D11_VIEWPORT* Viewport::GetData() { return viewportList.data(); }
-	UINT Viewport::GetCount() { return viewportList.size(); }
 }

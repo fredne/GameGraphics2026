@@ -35,7 +35,7 @@ export namespace F
 		Viewport* GetViewport();
 		void SetClearColor(Color color);
 
-
+		Vector2<uint32_t> GetCurrentRenderSize();
 
 	};
 

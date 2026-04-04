@@ -2,7 +2,6 @@
 #include "DirectXTex.h"
 import Texture;
 
-
 namespace F
 {
 	Texture::Texture() : 
@@ -27,8 +26,8 @@ namespace F
 		width = tmd.width;
 		height = tmd.height;
 
-
 		return SUCCEEDED(hr);
+
 	}
 	void Texture::Bind(ID3D11DeviceContext* context, uint32_t slot)
 	{

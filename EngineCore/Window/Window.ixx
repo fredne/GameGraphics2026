@@ -8,15 +8,14 @@ export namespace F
         HINSTANCE hInst;
         HWND hWnd;
         std::wstring title;
-        Vector2 size;
+        Vector2<float> size;
 
         bool InitWindow(HINSTANCE hInstance);
 
     public:
         Window(HINSTANCE hInstance, int width, int height, std::wstring title);
-        HWND GetWindowHandle() const;
-        Vector2 GetWindowSize();
-
+        HWND GetWindowHandle() const { return hWnd; }
+        Vector2<float> GetWindowSize() const { return size; }
 
     };
 
